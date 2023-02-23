@@ -2,9 +2,9 @@ name: 'Tests'
 
 on: 
   push:
-    branches: [ Xcode-10.1-Component ]
+    branches: [ main ]
   pull_request:
-    branches: [ Xcode-10.1-Component ]
+    branches: [ main ]
 #  schedule:
 #    - cron: '5 5 * * 5'
     
@@ -23,7 +23,7 @@ jobs:
     - uses: mxcl/xcodebuild@v1.9.2
       with:
         platform: iOS
-        scheme: 'XcodeTemplateProject'
+        scheme: 'OpenWeatherFreeClient'
         action: test
         code-coverage: true
         verbosity: xcpretty
@@ -43,7 +43,7 @@ jobs:
     - uses: mxcl/xcodebuild@v1.9.2
       with:
         platform: macOS
-        scheme: 'XcodeTemplateProject'
+        scheme: 'OpenWeatherFreeClient'
         action: test
         code-coverage: true
         verbosity: xcpretty
