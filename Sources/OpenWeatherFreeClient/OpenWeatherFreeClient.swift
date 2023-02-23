@@ -1,6 +1,6 @@
 //
-//  XcodeTemplateProject.swift
-//  XcodeTemplateProject
+//  OpenWeatherFreeClient.swift
+//  OpenWeatherFreeClient
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -10,6 +10,6 @@
 //  All rights reserved.
 //
 
-struct XcodeTemplateProject {
+struct OpenWeatherFreeClient {
     var text = "Hello, World!"
 }

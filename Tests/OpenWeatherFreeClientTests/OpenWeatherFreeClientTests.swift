@@ -1,6 +1,6 @@
 //
-//  XcodeTemplateProjectTests.swift
-//  XcodeTemplateProjectTests
+//  OpenWeatherFreeClientTests.swift
+//  OpenWeatherFreeClientTests
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -11,9 +11,9 @@
 //
 
 import XCTest
-@testable import XcodeTemplateProject
+@testable import OpenWeatherFreeClient
 
-final class XcodeTemplateProjectTests: XCTestCase {
+final class OpenWeatherFreeClientTests: XCTestCase {
 
     // func test_zero() { XCTFail("Tests not yet implemented in \(type(of: self)).") }
 
@@ -22,6 +22,6 @@ final class XcodeTemplateProjectTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests.
-        XCTAssertEqual(XcodeTemplateProject().text, "Hello, World!")
+        XCTAssertEqual(OpenWeatherFreeClient().text, "Hello, World!")
     }
 }

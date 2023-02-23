@@ -1,7 +1,7 @@
 // swift-tools-version:4.2
 
 /* Package.swift
- Version: 0.0.1
+ Version: 1.0.0
 
  Created by Mikhail Zhigulin in 7531.
 
@@ -17,11 +17,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "XcodeTemplateProject",
+    name: "OpenWeatherFreeClient",
     products: [
         .library(
-            name: "XcodeTemplateProject",
-            targets: ["XcodeTemplateProject"])
+            name: "OpenWeatherFreeClient",
+            targets: ["OpenWeatherFreeClient"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -29,10 +29,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "XcodeTemplateProject",
+            name: "OpenWeatherFreeClient",
             dependencies: []),
         .testTarget(
-            name: "XcodeTemplateProjectTests",
-            dependencies: ["XcodeTemplateProject"])
+            name: "OpenWeatherFreeClientTests",
+            dependencies: ["OpenWeatherFreeClient"])
     ]
 )
