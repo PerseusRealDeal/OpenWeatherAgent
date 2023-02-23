@@ -6,7 +6,6 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)
 [![Pod](https://img.shields.io/badge/Pod-1.0.0-informational.svg)](/OpenWeatherFreeClient.podspec)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS%209.3+_|_macOS%2010.9+-orange.svg)](https://en.wikipedia.org/wiki/IOS_9)
-[![SDK UIKit](https://img.shields.io/badge/SDK-UIKit%20-blueviolet.svg)](https://developer.apple.com/documentation/uikit)
 [![Xcode 10.1](https://img.shields.io/badge/Xcode-10.1+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
 [![Swift 4.2](https://img.shields.io/badge/Swift-4.2-red.svg)](https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html)
 [![License](http://img.shields.io/:License-MIT-blue.svg)](/LICENSE)
