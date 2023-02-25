@@ -12,7 +12,7 @@
 
 ## Integration Capabilities
 
-[![Standalone](https://img.shields.io/badge/Standalone%20File-available-informational.svg)](/OpenWeatherStar.swift)
+[![Standalone](https://img.shields.io/badge/Standalone%20-available-informational.svg)](/OpenWeatherStar.swift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 [![CocoaPods manager](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager)
