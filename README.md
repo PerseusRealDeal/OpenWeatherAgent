@@ -3,8 +3,8 @@
 > OpenWeatherMap API Wrapper.
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions)
-![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)
-[![Pod](https://img.shields.io/badge/Pod-1.0.0-informational.svg)](/OpenWeatherFreeClient.podspec)
+![Version](https://img.shields.io/badge/Version-0.0.1-green.svg)
+[![Pod](https://img.shields.io/badge/Pod-0.0.1-informational.svg)](/OpenWeatherFreeClient.podspec)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS%209.3+_|_macOS%2010.9+-orange.svg)](https://en.wikipedia.org/wiki/IOS_9)
 [![Xcode 10.1](https://img.shields.io/badge/Xcode-10.1+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
 [![Swift 4.2](https://img.shields.io/badge/Swift-4.2-red.svg)](https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html)
@@ -12,7 +12,7 @@
 
 ## Integration Capabilities
 
-[![Standalone File](https://img.shields.io/badge/Standalone%20File-available-informational.svg)](/OpenWeatherStar.swift)
+[![Standalone](https://img.shields.io/badge/Standalone%20File-available-informational.svg)](/OpenWeatherStar.swift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 [![CocoaPods manager](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager)
@@ -41,7 +41,7 @@ Podfile should contain:
 ```ruby
 target "ProjectTarget" do
   use_frameworks!
-  pod 'OpenWeatherFreeClient', '1.0.0'
+  pod 'OpenWeatherFreeClient', '0.0.1'
 end
 ```
 ## Carthage
@@ -49,7 +49,7 @@ end
 Cartfile should contain:
 
 ```carthage
-github "perseusrealdeal/OpenWeatherFreeClient" == 1.0.0
+github "perseusrealdeal/OpenWeatherFreeClient" == 0.0.1
 ```
 
 Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
@@ -61,7 +61,7 @@ Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8
 ```swift
 dependencies: [
         .package(url: "https://github.com/perseusrealdeal/OpenWeatherFreeClient.git",
-            .exact("1.0.0"))
+            .exact("0.0.1"))
     ],
 ```
 
