@@ -34,6 +34,16 @@
 
 Make a copy of the file [`OpenWeatherStar.swift`](/OpenWeatherStar.swift) then put it into a place required of a host project.
 
+## Carthage
+
+Cartfile should contain:
+
+```carthage
+github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.0
+```
+
+Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
+
 ## CocoaPods
 
 Podfile should contain:
@@ -44,15 +54,6 @@ target "ProjectTarget" do
   pod 'OpenWeatherFreeClient', '0.1.0'
 end
 ```
-## Carthage
-
-Cartfile should contain:
-
-```carthage
-github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.0
-```
-
-Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
 
 ## Swift Package Manager
 
