@@ -19,9 +19,36 @@ final class OpenWeatherFreeClientTests: XCTestCase {
 
     func test_the_first_success() { XCTAssertTrue(true, "It's done!") }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests.
-        XCTAssertEqual(OpenWeatherFreeClient().text, "Hello, World!")
+    func testOpenWeatherFreeClientInit() {
+
+        // arrange
+
+        let sut = OpenWeatherFreeClient()
+
+        // assert
+
+        XCTAssertNil(sut.dataTask)
+        XCTAssertNil(sut.session)
+        XCTAssertNil(sut.requestError)
+
+        XCTAssertTrue(sut.forecast == Data())
+    }
+
+    func test_onDataGiven_called() {
+
+        // arrange
+
+        let sut = OpenWeatherFreeClient()
+        var isCalled = false
+
+        sut.onDataGiven = { _ in isCalled = true }
+
+        // act
+
+        sut.forecast = Data()
+
+        // assert
+
+        XCTAssertTrue(isCalled)
     }
 }
