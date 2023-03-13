@@ -1,6 +1,6 @@
 # OpenWeatherFreeClient
 
-> OpenWeatherMap API Wrapper.
+> OpenWeatherMap Free API Client.
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions)
 ![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)
@@ -85,4 +85,4 @@ Have a look at [LICENSE](/LICENSE) for details.
 
 # Author
 
-`OpenWeatherFreeClient` was written at Novosibirsk by Mikhail Zhigulin i.e. me, mzhigulin@gmail.com.
+> `OpenWeatherFreeClient` was written at Novosibirsk by Mikhail Zhigulin i.e. me, mzhigulin@gmail.com.
