@@ -18,6 +18,7 @@ enum OpenWeatherCallError: Error {
 
 struct OpenWeatherCallDetails {
     var appID: String!
+    var version: String!
 }
 
 class OpenWeatherFreeClient {
@@ -28,15 +29,16 @@ class OpenWeatherFreeClient {
     var requestError: OpenWeatherCallError?
 
     var onDataGiven: (Data) -> Void = { print($0 as Any) }
-    var forecast: Data = Data() {
+    var forecast: Data { return forecastData }
+
+    private(set) var forecastData: Data = Data() {
         didSet {
-            onDataGiven(forecast)
+            onDataGiven(forecastData)
         }
     }
 
     func call(with respect: OpenWeatherCallDetails) {
-
-        guard let _ = dataTask, let _ = session else { return }
-
+        forecastData = Data()
+        // guard let _ = dataTask, let _ = session else { return }
     }
 }
