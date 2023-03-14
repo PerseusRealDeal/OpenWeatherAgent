@@ -13,7 +13,7 @@
 import Foundation
 
 let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
-let weatherSchemeAttributes = "%@?lat=%@&lon=%@&units=%@&appid=%@"
+let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
 enum OpenWeatherURLFormat: String {
     case currentWeather = "weather"
@@ -84,6 +84,10 @@ struct OpenWeatherDetails {
 
         if mode != .json {
             attributes.append("&mode=\(mode.rawValue)")
+        }
+
+        if units != .standard {
+            attributes.append("&units=\(units.rawValue)")
         }
 
         return weatherSchemeBase + attributes
