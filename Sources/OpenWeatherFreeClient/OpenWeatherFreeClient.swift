@@ -43,6 +43,8 @@ struct OpenWeatherDetails {
     let units: Units
     let lang: Lang
 
+    var cnt: Int = -1 // A number of timestamps, which will be returned in the API response.
+
     init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
          lat: String = "55.66", lon: String = "85.62",
          units: Units = .standard, lang: Lang = .byDefault) {
@@ -61,7 +63,11 @@ struct OpenWeatherDetails {
         var attributes = String(format: weatherSchemeAttributes, arguments: args)
 
         if !lang.rawValue.isEmpty {
-            attributes.append(String(format: "&lang=%@", arguments: [lang.rawValue]))
+            attributes.append("&lang=\(lang.rawValue)")
+        }
+
+        if format == .forecast && cnt != -1 {
+            attributes.append("&cnt=\(cnt)")
         }
 
         return weatherSchemeBase + attributes
