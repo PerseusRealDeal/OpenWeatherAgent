@@ -31,8 +31,8 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         XCTAssertNil(sut.session)
         XCTAssertNil(sut.requestError)
 
-        XCTAssertTrue(sut.forecast == Data())
-        XCTAssertTrue(sut.forecastData == Data())
+        XCTAssertTrue(sut.data == Data())
+        XCTAssertTrue(sut.weatherData == Data())
     }
 
     func test_onDataGiven_called() {
@@ -40,7 +40,7 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // arrange
 
         let sut = OpenWeatherFreeClient()
-        let dummyCallDetails = OpenWeatherCallDetails(appID: "", version: "")
+        let dummyCallDetails = OpenWeatherDetails(appid: "", format: .currentWeather)
         var isCalled = false
 
         sut.onDataGiven = { _ in isCalled = true }

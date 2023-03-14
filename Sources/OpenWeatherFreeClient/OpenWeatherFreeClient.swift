@@ -12,13 +12,51 @@
 
 import Foundation
 
-enum OpenWeatherCallError: Error {
-    case failedRequest(String)
+let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
+let weatherSchemeAttributes = "%@?lat=%@&lon=%@&units=%@&appid=%@"
+
+enum OpenWeatherURLFormat: String {
+    case currentWeather = "weather"
+    case forecast = "forecast"
 }
 
-struct OpenWeatherCallDetails {
-    var appID: String!
-    var version: String!
+enum Units: String {
+    case standard = "standard" // by default
+    case metric = "metric"
+    case imperial = "imperial"
+}
+
+struct OpenWeatherDetails {
+
+    let appid: String
+    let format: OpenWeatherURLFormat
+
+    let lat: String
+    let lon: String
+
+    let units: Units
+
+    init(appid: String, format: OpenWeatherURLFormat,
+         lat: String = "55.66", lon: String = "85.62", units: Units = .standard) {
+
+        self.appid = appid
+        self.format = format
+        self.lat = lat
+        self.lon = lon
+        self.units = units
+    }
+
+    var urlString: String {
+
+        let args: [String] = [format.rawValue, lat, lon, units.rawValue, appid]
+        let attributes = String(format: weatherSchemeAttributes, arguments: args)
+
+        return weatherSchemeBase + attributes
+    }
+}
+
+enum OpenWeatherCallError: Error {
+    case failedRequest(String)
 }
 
 class OpenWeatherFreeClient {
@@ -29,16 +67,17 @@ class OpenWeatherFreeClient {
     var requestError: OpenWeatherCallError?
 
     var onDataGiven: (Data) -> Void = { print($0 as Any) }
-    var forecast: Data { return forecastData }
+    var data: Data { return weatherData }
 
-    private(set) var forecastData: Data = Data() {
+    private(set) var weatherData: Data = Data() {
         didSet {
-            onDataGiven(forecastData)
+            onDataGiven(weatherData)
         }
     }
 
-    func call(with respect: OpenWeatherCallDetails) {
-        forecastData = Data()
+    func call(with respect: OpenWeatherDetails) {
+        weatherData = Data()
+        print(respect.urlString)
         // guard let _ = dataTask, let _ = session else { return }
     }
 }
