@@ -21,15 +21,19 @@ enum OpenWeatherURLFormat: String {
 }
 
 enum Units: String {
-    case standard = "standard" // by default
+    case standard = "standard" // By default.
     case metric = "metric"
     case imperial = "imperial"
 }
 
-enum Lang: String {
-    case byDefault = "" // by default lang attribute is empty
-    case en = "en"
-    case ru = "ru"
+struct Lang: RawRepresentable {
+    var rawValue: String
+    static let byDefault = Lang(rawValue: "") // By default lang attribute is empty.
+}
+
+extension Lang {
+    static let en = Lang(rawValue: "en")
+    static let ru = Lang(rawValue: "ru")
 }
 
 struct OpenWeatherDetails {
@@ -47,7 +51,7 @@ struct OpenWeatherDetails {
 
     init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
          lat: String = "55.66", lon: String = "85.62",
-         units: Units = .standard, lang: Lang = .byDefault) {
+         units: Units = .standard, lang: Lang = Lang.ru) {
 
         self.appid = appid
         self.format = format
