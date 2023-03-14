@@ -13,7 +13,7 @@
 import Foundation
 
 let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
-let weatherSchemeAttributes = "%@?lat=%@&lon=%@&units=%@&appid=%@"
+let weatherSchemeAttributes = "%@?lat=%@&lon=%@&units=%@&appid=%@&lang=%@"
 
 enum OpenWeatherURLFormat: String {
     case currentWeather = "weather"
@@ -26,6 +26,11 @@ enum Units: String {
     case imperial = "imperial"
 }
 
+enum Lang: String {
+    case en = "en"
+    case ru = "ru"
+}
+
 struct OpenWeatherDetails {
 
     let appid: String
@@ -35,20 +40,23 @@ struct OpenWeatherDetails {
     let lon: String
 
     let units: Units
+    let lang: Lang
 
-    init(appid: String, format: OpenWeatherURLFormat,
-         lat: String = "55.66", lon: String = "85.62", units: Units = .standard) {
+    init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
+         lat: String = "55.66", lon: String = "85.62",
+         units: Units = .standard, lang: Lang = .en) {
 
         self.appid = appid
         self.format = format
         self.lat = lat
         self.lon = lon
         self.units = units
+        self.lang = lang
     }
 
     var urlString: String {
 
-        let args: [String] = [format.rawValue, lat, lon, units.rawValue, appid]
+        let args: [String] = [format.rawValue, lat, lon, units.rawValue, appid, lang.rawValue]
         let attributes = String(format: weatherSchemeAttributes, arguments: args)
 
         return weatherSchemeBase + attributes

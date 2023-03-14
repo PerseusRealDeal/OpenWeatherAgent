@@ -40,7 +40,7 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // arrange
 
         let sut = OpenWeatherFreeClient()
-        let dummyCallDetails = OpenWeatherDetails(appid: "", format: .currentWeather)
+        let dummyCallDetails = OpenWeatherDetails(appid: "code")
         var isCalled = false
 
         sut.onDataGiven = { _ in isCalled = true }
