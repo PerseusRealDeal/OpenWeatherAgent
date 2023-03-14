@@ -26,6 +26,12 @@ enum Units: String {
     case imperial = "imperial"
 }
 
+enum Mode: String {
+    case json = "json" // By default.
+    case xml = "xml"
+    case html = "html"
+}
+
 struct Lang: RawRepresentable {
     var rawValue: String
     static let byDefault = Lang(rawValue: "") // By default lang attribute is empty.
@@ -46,12 +52,13 @@ struct OpenWeatherDetails {
 
     let units: Units
     let lang: Lang
+    let mode: Mode
 
     var cnt: Int = -1 // A number of timestamps, which will be returned in the API response.
 
     init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
-         lat: String = "55.66", lon: String = "85.62",
-         units: Units = .standard, lang: Lang = Lang.ru) {
+         lat: String = "55.66", lon: String = "85.62", units: Units = .standard,
+         lang: Lang = Lang.byDefault, mode: Mode = Mode.json) {
 
         self.appid = appid
         self.format = format
@@ -59,6 +66,7 @@ struct OpenWeatherDetails {
         self.lon = lon
         self.units = units
         self.lang = lang
+        self.mode = mode
     }
 
     var urlString: String {
@@ -72,6 +80,10 @@ struct OpenWeatherDetails {
 
         if format == .forecast && cnt != -1 {
             attributes.append("&cnt=\(cnt)")
+        }
+
+        if mode != .json {
+            attributes.append("&mode=\(mode.rawValue)")
         }
 
         return weatherSchemeBase + attributes
