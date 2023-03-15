@@ -12,6 +12,12 @@
 
 import Foundation
 
+extension OpenWeatherFreeClient {
+    func call(with respect: OpenWeatherDetails) {
+        requestData(url: URL(string: respect.urlString)!)
+    }
+}
+
 class OpenWeatherFreeClient {
 
     private(set) var dataTask: URLSessionDataTask?
@@ -29,14 +35,10 @@ class OpenWeatherFreeClient {
     }
 
     private func requestData(url: URL) {
+
+        // guard let _ = dataTask, let _ = session else { return }
+
         weatherData = Data()
         print(url.absoluteString)
-    }
-}
-
-extension OpenWeatherFreeClient {
-    func call(with respect: OpenWeatherDetails) {
-        requestData(url: URL(string: respect.urlString)!)
-        // guard let _ = dataTask, let _ = session else { return }
     }
 }
