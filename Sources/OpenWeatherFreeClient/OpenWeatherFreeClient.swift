@@ -28,9 +28,15 @@ class OpenWeatherFreeClient {
         }
     }
 
-    func call(with respect: OpenWeatherDetails) {
+    private func requestData(url: URL) {
         weatherData = Data()
-        print(respect.urlString)
+        print(url.absoluteString)
+    }
+}
+
+extension OpenWeatherFreeClient {
+    func call(with respect: OpenWeatherDetails) {
+        requestData(url: URL(string: respect.urlString)!)
         // guard let _ = dataTask, let _ = session else { return }
     }
 }

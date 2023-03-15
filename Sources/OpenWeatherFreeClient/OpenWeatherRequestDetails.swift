@@ -71,7 +71,7 @@ struct OpenWeatherDetails {
 
     var urlString: String {
 
-        let args: [String] = [format.rawValue, lat, lon, units.rawValue, appid]
+        let args: [String] = [format.rawValue, lat, lon, appid]
         var attributes = String(format: weatherSchemeAttributes, arguments: args)
 
         if !lang.rawValue.isEmpty {
