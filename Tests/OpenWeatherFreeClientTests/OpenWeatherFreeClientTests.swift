@@ -19,7 +19,7 @@ final class OpenWeatherFreeClientTests: XCTestCase {
 
     func test_the_first_success() { XCTAssertTrue(true, "It's done!") }
 
-    // MARK: - The API Requests checks
+    // MARK: - The API Request checks
 
     func test_OpenWeather_call_default_schemes() {
 
@@ -60,17 +60,19 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         let units: Units = .metric
         let lang:Lang = Lang.ru
         let mode: Mode = .xml
+        let cnt = 1
 
-        let sut = OpenWeatherDetails(appid: apikey, format: format,
+        var sut = OpenWeatherDetails(appid: apikey, format: format,
                                      lat: "\(lat)", lon: "\(lon)", units: units,
                                      lang: lang, mode: mode)
+        sut.cnt = cnt
 
         let requirementScheme = "https://api.openweathermap.org/data/2.5/"
-        let requirementSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@&lang=%@&mode=%@&units=%@"
+        let requirementSchemeAttributes =
+        "%@?lat=%@&lon=%@&appid=%@&lang=%@&cnt=%@&mode=%@&units=%@"
 
         let args: [String] = [format.rawValue, "\(lat)", "\(lon)", apikey,
-                              lang.rawValue, mode.rawValue, units.rawValue]
-
+                              lang.rawValue, "\(cnt)", mode.rawValue, units.rawValue]
         let requirement = String(format: requirementScheme + requirementSchemeAttributes,
                                  arguments: args)
 
@@ -116,5 +118,5 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         XCTAssertTrue(isCalled)
     }
 
-    // MARK: - The API Responses checks
+    // MARK: - The API Response checks
 }
