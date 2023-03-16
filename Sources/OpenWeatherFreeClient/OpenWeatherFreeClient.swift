@@ -12,13 +12,13 @@
 
 import Foundation
 
-extension OpenWeatherFreeClient {
+class OpenWeatherFreeClient: FreeNetworkClient {
     func call(with respect: OpenWeatherDetails) {
         requestData(url: URL(string: respect.urlString)!)
     }
 }
 
-class OpenWeatherFreeClient {
+class FreeNetworkClient {
 
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession?
@@ -26,19 +26,19 @@ class OpenWeatherFreeClient {
     var requestError: OpenWeatherCallError?
 
     var onDataGiven: (Data) -> Void = { print($0 as Any) }
-    var data: Data { return weatherData }
+    var data: Data { return networkData }
 
-    private(set) var weatherData: Data = Data() {
+    private(set) var networkData: Data = Data() {
         didSet {
-            onDataGiven(weatherData)
+            onDataGiven(networkData)
         }
     }
 
-    private func requestData(url: URL) {
+    internal func requestData(url: URL) {
 
         // guard let _ = dataTask, let _ = session else { return }
 
-        weatherData = Data()
+        networkData = Data()
         print(url.absoluteString)
     }
 }
