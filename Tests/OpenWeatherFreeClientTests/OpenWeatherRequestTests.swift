@@ -56,7 +56,7 @@ final class OpenWeatherRequestTests: XCTestCase {
         let lat = 11.11
         let lon = 22.22
         let units: Units = .metric
-        let lang:Lang = Lang.ru
+        let lang: Lang = Lang.ru
         let mode: Mode = .xml
         let cnt = 1
 

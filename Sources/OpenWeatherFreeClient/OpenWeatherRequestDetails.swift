@@ -21,15 +21,15 @@ enum OpenWeatherURLFormat: String {
 }
 
 enum Units: String {
-    case standard = "standard" // By default.
-    case metric = "metric"
-    case imperial = "imperial"
+    case standard // By default.
+    case metric
+    case imperial
 }
 
 enum Mode: String {
-    case json = "json" // By default.
-    case xml = "xml"
-    case html = "html"
+    case json // By default.
+    case xml
+    case html
 }
 
 struct Lang: RawRepresentable {
@@ -92,8 +92,4 @@ struct OpenWeatherDetails {
 
         return weatherSchemeBase + attributes
     }
-}
-
-enum OpenWeatherCallError: Error {
-    case failedRequest(String)
 }

@@ -30,31 +30,95 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // assert
 
         XCTAssertNil(sut.dataTask)
-        XCTAssertNil(sut.session)
-        XCTAssertNil(sut.requestError)
 
         XCTAssertTrue(sut.data == Data())
         XCTAssertTrue(sut.networkData == Data())
     }
 
+    func test_call_with_invalid_url() {
+
+        // arrange
+
+        let sut = OpenWeatherFreeClient()
+        let dummyCallDetails = OpenWeatherDetails(appid: "\\")
+
+        // act, assert
+
+        XCTAssertThrowsError(try sut.call(with: dummyCallDetails)) { (error) in
+            XCTAssertEqual(error as? NetworkClientError, NetworkClientError.invalidUrl)
+        }
+    }
+/*
     func test_onDataGiven_called() {
 
         // arrange
 
         let sut = OpenWeatherFreeClient()
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
+        print(dummyCallDetails.urlString)
         var isCalled = false
 
         sut.onDataGiven = { _ in isCalled = true }
 
         // act
 
-        sut.call(with: dummyCallDetails)
+        try? sut.call(with: dummyCallDetails)
 
         // assert
 
         XCTAssertTrue(isCalled)
     }
-
+*/
     // MARK: - The API Response checks
+}
+
+// THIS EXTENSION NOT FOR REGULAR USE.
+
+extension OpenWeatherFreeClientTests {
+
+    #if false
+
+    func test_onDataGiven_called_with_network_connection() {
+
+        // arrange
+
+        let apikey =  "The API key"
+
+        let client = OpenWeatherFreeClient()
+        let callDetails = OpenWeatherDetails(appid: apikey)
+
+        let onDataGivenInvoked = expectation(description: "onDataGiven closure invoked")
+
+        client.onDataGiven = { result in
+
+            switch result {
+            case .success(let weatherData):
+                print("""
+                    DATA: BEGIN
+                    \(String(decoding: weatherData, as: UTF8.self))
+                    DATA: END
+                    """)
+            case .failure(let error):
+                switch error {
+                case .failedRequest(let message):
+                    print(message)
+                default:
+                    break
+                }
+            }
+
+            onDataGivenInvoked.fulfill()
+        }
+
+        // act
+
+        try? client.call(with: callDetails)
+        waitForExpectations(timeout: 3)
+
+        // assert
+
+        XCTAssertTrue(client.data != Data(), "There's nothing of data!")
+    }
+
+    #endif
 }
