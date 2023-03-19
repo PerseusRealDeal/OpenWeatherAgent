@@ -1,5 +1,5 @@
 //
-//  OpenWeatherWithNetworkTests.swift
+//  OpenWeatherOnlineTest.swift
 //  OpenWeatherFreeClientTests
 //
 //  Created by Mikhail Zhigulin in 7531.
@@ -15,12 +15,12 @@ import XCTest
 
 // The API Client checks
 
-/* THIS EXTENSION NOT FOR REGULAR USE.
+/* THIS EXTENSION NOT FOR REGULAR USE
 
  Instructions:
 
- step 1: change compiller directive #if from false to true
- step 2: give a real api key to the apikey variable
+ step 1: change #if from false to true
+ step 2: give a real api key
  step 3: run test
 
 */

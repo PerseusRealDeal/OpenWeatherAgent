@@ -181,4 +181,3 @@ final class OpenWeatherFreeClientTests: XCTestCase {
 
     // MARK: - The API Response checks
 }
-

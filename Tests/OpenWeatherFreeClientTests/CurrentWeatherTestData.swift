@@ -1,5 +1,5 @@
 //
-//  currentWeatherTestData.swift
+//  CurrentWeatherTestData.swift
 //  OpenWeatherFreeClientTests
 //
 //  Created by Mikhail Zhigulin in 7531.
