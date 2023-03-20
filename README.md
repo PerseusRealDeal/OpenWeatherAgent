@@ -17,6 +17,10 @@
 [![CocoaPods manager](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager)
 
+# In Brief
+
+> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API.
+
 # Requirements
 
 - Xcode 10.1+
@@ -27,6 +31,68 @@
 # Third-party software
 
 - [SwiftLint](https://github.com/realm/SwiftLint) / [0.31.0: Busy Laundromat](https://github.com/realm/SwiftLint/releases/tag/0.31.0) for macOS High Sierra
+
+# Usage
+
+## Call Current Weather
+
+```swift
+let apikey = "The API key"
+
+let client = OpenWeatherFreeClient()
+let callDetails = OpenWeatherDetails(appid: apikey)
+
+client.onDataGiven = { result in
+
+  switch result {
+    case .success(let weatherData):
+      print("""
+        DATA: BEGIN
+        \(String(decoding: weatherData, as: UTF8.self))
+        DATA: END
+      """)
+    case .failure(let error):
+      switch error {
+       case .failedRequest(let message):
+         print(message)
+       default:
+         break
+      }
+    }
+}
+
+try? client.call(with: callDetails)
+```
+
+## Call 5 Day / 3 Hour Forecast
+
+```swift
+let apikey = "The API key"
+
+let client = OpenWeatherFreeClient()
+let callDetails = OpenWeatherDetails(appid: apikey, format: .forecast)
+
+client.onDataGiven = { result in
+
+  switch result {
+    case .success(let weatherData):
+      print("""
+        DATA: BEGIN
+        \(String(decoding: weatherData, as: UTF8.self))
+        DATA: END
+      """)
+    case .failure(let error):
+      switch error {
+       case .failedRequest(let message):
+         print(message)
+       default:
+         break
+      }
+    }
+}
+
+try? client.call(with: callDetails)
+```
 
 # Installation
 
