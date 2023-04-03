@@ -19,7 +19,7 @@
 
 # In Brief
 
-> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API.
+> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. Having [individual API key](https://openweathermap.org/appid) is required.
 
 # Requirements
 
