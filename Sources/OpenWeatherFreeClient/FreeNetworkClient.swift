@@ -30,9 +30,7 @@ class FreeNetworkClient {
     private(set) var session: URLSession
 
     var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
-        #if DEBUG
-        print(#function + ": \(result)")
-        #endif
+        PerseusLogger.message("Default closure invoked! \(#function): \(result)")
     }
 
     var data: Data { return networkData }
@@ -43,6 +41,7 @@ class FreeNetworkClient {
     }
 
     init(_ session: URLSession = URLSession.shared) {
+        PerseusLogger.message("[\(FreeNetworkClient.self)].\(#function)")
         self.session = session
     }
 

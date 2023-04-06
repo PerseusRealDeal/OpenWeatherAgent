@@ -25,6 +25,8 @@ import XCTest
 
 */
 
+@testable import OpenWeatherFreeClient
+
 extension OpenWeatherFreeClientTests {
 
     #if false
@@ -44,7 +46,7 @@ extension OpenWeatherFreeClientTests {
 
             switch result {
             case .success(let weatherData):
-                print("""
+                PerseusLogger.message("""
                     DATA: BEGIN
                     \(String(decoding: weatherData, as: UTF8.self))
                     DATA: END
@@ -52,7 +54,7 @@ extension OpenWeatherFreeClientTests {
             case .failure(let error):
                 switch error {
                 case .failedRequest(let message):
-                    print(message)
+                    PerseusLogger.message(message, .error)
                 default:
                     break
                 }
