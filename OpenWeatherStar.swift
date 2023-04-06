@@ -64,11 +64,7 @@ class FreeNetworkClient {
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession
 
-    var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
-        #if DEBUG
-        print(#function + ": \(result)")
-        #endif
-    }
+    var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { _ in }
 
     var data: Data { return networkData }
     private(set) var networkData: Data = Data() {
