@@ -19,7 +19,9 @@
 
 # In Brief
 
-> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. Having [individual API key](https://openweathermap.org/appid) is required.
+> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. 
+
+> Having [individual API key](https://openweathermap.org/appid) is required.
 
 # Requirements
 
@@ -27,6 +29,10 @@
 - Swift 4.2+
 - iOS: 9.3+, UIKit SDK
 - macOS: 10.9+, AppKit SDK
+
+# First-party software
+
+- [PerseusLogger](https://gist.github.com/perseusrealdeal/df456a9825fcface44eca738056eb6d5)
 
 # Third-party software
 
