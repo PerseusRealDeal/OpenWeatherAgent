@@ -24,25 +24,40 @@ public enum Result<Value, Error: Swift.Error> {
     case failure(Error)
 }
 
-class FreeNetworkClient {
+public class FreeNetworkClient {
 
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession
 
-    var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
-        PerseusLogger.message("Default closure invoked! \(#function): \(result)")
+    public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
+        switch result {
+        case .success(let weatherData):
+            log.message("""
+            — Default closure invoked! \(#function): \(result)
+              DATA: BEGIN
+              \(String(decoding: weatherData, as: UTF8.self))
+              DATA: END
+            """, .info)
+        case .failure(let error):
+            switch error {
+            case .failedRequest(let message):
+                log.message(message, .error)
+            default:
+                break
+            }
+        }
     }
 
-    var data: Data { return networkData }
+    public var data: Data { return networkData }
     private(set) var networkData: Data = Data() {
         didSet {
             onDataGiven(.success(networkData))
         }
     }
 
-    init(_ session: URLSession = URLSession.shared) {
-        PerseusLogger.message("[\(FreeNetworkClient.self)].\(#function)")
+    public init(_ session: URLSession = URLSession.shared) {
         self.session = session
+        log.message("[\(type(of: self))].\(#function)", .info)
     }
 
     internal func requestData(url: URL) {
@@ -66,9 +81,7 @@ class FreeNetworkClient {
 
             // Communicate changes
 
-            DispatchQueue.main.async { [weak self] in
-
-                guard let self = self else { return }
+            DispatchQueue.main.async {
 
                 if let requestedData = answerData {
                     self.networkData = requestedData

@@ -12,9 +12,9 @@
 
 import Foundation
 
-class OpenWeatherFreeClient: FreeNetworkClient {
+public class OpenWeatherFreeClient: FreeNetworkClient {
 
-    func call(with respect: OpenWeatherDetails) throws {
+    public func call(with respect: OpenWeatherDetails) throws {
         guard let requestURL = URL(string: respect.urlString) else {
             throw NetworkClientError.invalidUrl
         }

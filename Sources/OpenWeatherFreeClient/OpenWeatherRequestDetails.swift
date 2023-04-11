@@ -15,50 +15,55 @@ import Foundation
 let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
 let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
-enum OpenWeatherURLFormat: String {
+public enum OpenWeatherURLFormat: String {
     case currentWeather = "weather"
     case forecast = "forecast"
 }
 
-enum Units: String {
+public enum Units: String {
     case standard // By default.
     case metric
     case imperial
 }
 
-enum Mode: String {
+public enum Mode: String {
     case json // By default.
     case xml
     case html
 }
 
-struct Lang: RawRepresentable {
-    var rawValue: String
-    static let byDefault = Lang(rawValue: "") // By default lang attribute is empty.
+public struct Lang: RawRepresentable {
+    public var rawValue: String
+    public static let byDefault = Lang(rawValue: "") // By default lang attribute is empty.
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
 }
 
 extension Lang {
-    static let en = Lang(rawValue: "en")
-    static let ru = Lang(rawValue: "ru")
+    public static let en = Lang(rawValue: "en")
+    public static let ru = Lang(rawValue: "ru")
 }
 
-struct OpenWeatherDetails {
+public struct OpenWeatherDetails {
 
-    let appid: String
-    let format: OpenWeatherURLFormat
+    public let appid: String
+    public let format: OpenWeatherURLFormat
 
-    let lat: String
-    let lon: String
+    public let lat: String
+    public let lon: String
 
-    let units: Units
-    let lang: Lang
-    let mode: Mode
+    public let units: Units
+    public let lang: Lang
+    public let mode: Mode
 
-    var cnt: Int = -1 // A number of timestamps, which will be returned in the API response.
+    // A number of timestamps, which will be returned in the API response.
+    public var cnt: Int = -1
 
-    init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
-         lat: String = "55.66", lon: String = "85.62", units: Units = .standard,
-         lang: Lang = Lang.byDefault, mode: Mode = Mode.json) {
+    public init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
+                lat: String = "55.66", lon: String = "85.62", units: Units = .standard,
+                lang: Lang = Lang.byDefault, mode: Mode = Mode.json) {
 
         self.appid = appid
         self.format = format
@@ -69,7 +74,7 @@ struct OpenWeatherDetails {
         self.mode = mode
     }
 
-    var urlString: String {
+    public var urlString: String {
 
         let args: [String] = [format.rawValue, lat, lon, appid]
         var attributes = String(format: weatherSchemeAttributes, arguments: args)

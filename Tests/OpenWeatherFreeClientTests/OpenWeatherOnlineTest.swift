@@ -44,7 +44,7 @@ extension OpenWeatherFreeClientTests {
 
             switch result {
             case .success(let weatherData):
-                PerseusLogger.message("""
+                log.message("""
                     \(#function)
                     DATA: BEGIN
                     \(String(decoding: weatherData, as: UTF8.self))
@@ -53,7 +53,7 @@ extension OpenWeatherFreeClientTests {
             case .failure(let error):
                 switch error {
                 case .failedRequest(let message):
-                    PerseusLogger.message(message, .error)
+                    log.message(message, .error)
                 default:
                     break
                 }
