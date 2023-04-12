@@ -46,7 +46,10 @@
  */
 
 import Foundation
+
+// swiftlint:disable type_name
 typealias log = PerseusLogger
+// swiftlint:enable type_name
 
 public class PerseusLogger {
 
