@@ -49,12 +49,12 @@ class OpenWeatherFreeClient: FreeNetworkClient {
     }
 }
 
-public enum NetworkClientError: Error, Equatable {
+enum NetworkClientError: Error, Equatable {
     case invalidUrl
     case failedRequest(String)
 }
 
-public enum Result<Value, Error: Swift.Error> {
+enum Result<Value, Error: Swift.Error> {
     case success(Value)
     case failure(Error)
 }
@@ -98,9 +98,7 @@ class FreeNetworkClient {
 
             // Communicate changes
 
-            DispatchQueue.main.async { [weak self] in
-
-                guard let self = self else { return }
+            DispatchQueue.main.async {
 
                 if let requestedData = answerData {
                     self.networkData = requestedData
