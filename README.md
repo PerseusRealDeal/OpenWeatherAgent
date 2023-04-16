@@ -1,4 +1,4 @@
-# OpenWeatherFreeClient
+# OpenWeatherFreeClient — Component — Xcode 10.1+
 
 > OpenWeatherMap Free API Client.
 
@@ -21,11 +21,12 @@
 
 > This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. 
 
-> Having [individual API key](https://openweathermap.org/appid) is required.
+> Having an [individual API key](https://openweathermap.org/appid) is required.
 
 # Requirements
 
-- Xcode 10.1+
+- [macOS 10.13.6+](https://apps.apple.com/us/app/macos-high-sierra/id1246284741?ls=1)
+- [Xcode 10.1+](https://stackoverflow.com/questions/10335747/how-to-download-xcode-dmg-or-xip-file)
 - Swift 4.2+
 - iOS: 9.3+, UIKit SDK
 - macOS: 10.9+, AppKit SDK
@@ -151,8 +152,8 @@ All files from this repository is under license based on MIT.
 
 Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
 
-- The year starts from the creation of the world according to a Slavic calendar.
-- September, the 1st of Slavic year.
+- The year starts from the creation of the world according to a Slavic calendar
+- September, the 1st of Slavic year
 
 Have a look at [LICENSE](/LICENSE) for details.
 
