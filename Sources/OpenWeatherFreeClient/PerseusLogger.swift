@@ -36,6 +36,13 @@
 //  SOFTWARE.
 //
 
+// DESC: USE LOGGER LIKE A VARIABLE ANYAWHERE YOU WANT
+//
+// By default logger is turned on in DEBUG, but it's off in RELEASE.
+//
+// log.message("[\(type(of: self))].\(#function)")
+//
+
 /* To disable debug messaging of the module use the following statements in the start point.
 
  import class OpenWeatherFreeClient.PerseusLogger
@@ -100,6 +107,8 @@ public class PerseusLogger {
             message = "\(type.description): \(text()), file: \(fileName), line: \(line)"
         }
 
-        DispatchQueue.main.async { print(message) }
+        // DispatchQueue.main.async { print(message) }
+
+        print(message)
     }
 }
