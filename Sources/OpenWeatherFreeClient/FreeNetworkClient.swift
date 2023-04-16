@@ -37,7 +37,7 @@ public class FreeNetworkClient {
               DATA: BEGIN
               \(String(decoding: weatherData, as: UTF8.self))
               DATA: END
-            """, .info)
+            """)
         case .failure(let error):
             switch error {
             case .failedRequest(let message):
@@ -57,10 +57,13 @@ public class FreeNetworkClient {
 
     public init(_ session: URLSession = URLSession.shared) {
         self.session = session
-        log.message("[\(type(of: self))].\(#function)", .info)
+
+        log.message("[\(type(of: self))].\(#function)")
     }
 
     internal func requestData(url: URL) {
+
+        log.message("[\(type(of: self))].\(#function)")
 
         dataTask = session.dataTask(with: URLRequest(url: url)) {
             [self] (requestedData: Data?, response: URLResponse?, error: Error?) -> Void in
