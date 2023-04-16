@@ -75,7 +75,6 @@ public class FreeNetworkClient {
 
     public init(_ session: URLSession = URLSession.shared) {
         self.session = session
-        log.message("[\(type(of: self))].\(#function)", .info)
     }
 
     internal func requestData(url: URL) {
