@@ -33,7 +33,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-// swiftlint:disable closure_parameter_position
+// swiftlint:disable file_length closure_parameter_position
 //
 
 import Foundation
