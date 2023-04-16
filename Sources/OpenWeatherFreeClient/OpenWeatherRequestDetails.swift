@@ -12,8 +12,8 @@
 
 import Foundation
 
-let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
-let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
+public let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
+public let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
 public enum OpenWeatherURLFormat: String {
     case currentWeather = "weather"
