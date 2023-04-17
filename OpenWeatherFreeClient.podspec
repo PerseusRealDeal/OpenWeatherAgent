@@ -2,8 +2,8 @@ Pod::Spec.new do |p|
 
 p.name           = "OpenWeatherFreeClient"
 p.version        = "0.1.0"
-p.summary        = "OpenWeather Free API Client."
-p.description    = "OpenWeatherMap Dara Provider Free API Client."
+p.summary        = "OpenWeather free API client."
+p.description    = "OpenWeatherMap data provider, free API client."
 p.homepage       = "https://github.com/perseusrealdeal/OpenWeatherFreeClient"
 
 p.license        = { :type => "MIT", :file => "LICENSE" }
