@@ -1,6 +1,6 @@
-# OpenWeatherFreeClient — Component — Xcode 10.1+
+# OpenWeatherFreeClient — Xcode 10.1+
 
-> OpenWeatherMap Free API Client.
+> This is the component for macOS and iOS apps.
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions)
 ![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)
@@ -19,7 +19,7 @@
 
 # In Brief
 
-> This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. 
+> OpenWeatherMap Free API Client. This library lets a developer make calls requesting data available for free with [OpenWeather API](https://openweathermap.org). It brings implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. 
 
 > Having an [individual API key](https://openweathermap.org/appid) is required.
 
