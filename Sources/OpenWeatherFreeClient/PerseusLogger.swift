@@ -36,7 +36,7 @@
 //  SOFTWARE.
 //
 
-// DESC: USE LOGGER LIKE A VARIABLE ANYAWHERE YOU WANT
+// DESC: USE LOGGER LIKE A VARIABLE ANYWHERE YOU WANT
 //
 // By default logger is turned on in DEBUG, but it's off in RELEASE.
 //
