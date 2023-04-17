@@ -118,25 +118,25 @@ public let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
 public let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
 public enum OpenWeatherURLFormat: String {
-    case currentWeather = "weather"
+    case currentWeather = "weather" // Default.
     case forecast = "forecast"
 }
 
 public enum Units: String {
-    case standard // By default.
+    case standard // Default.
     case metric
     case imperial
 }
 
 public enum Mode: String {
-    case json // By default.
+    case json // Default.
     case xml
     case html
 }
 
 public struct Lang: RawRepresentable {
     public var rawValue: String
-    public static let byDefault = Lang(rawValue: "") // By default lang attribute is empty.
+    public static let byDefault = Lang(rawValue: "")
 
     public init(rawValue: String) {
         self.rawValue = rawValue
