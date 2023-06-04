@@ -17,6 +17,8 @@ import Foundation
 public enum NetworkClientError: Error, Equatable {
     case invalidUrl
     case failedRequest(String)
+    case statusCode404
+    case failedResponse(String)
 }
 
 public enum Result<Value, Error: Swift.Error> {
@@ -26,8 +28,13 @@ public enum Result<Value, Error: Swift.Error> {
 
 public class FreeNetworkClient {
 
+    #if DEBUG
+    private(set) var dataTask: URLSessionDataTaskProtocol?
+    var session: URLSessionProtocol!
+    #else
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession
+    #endif
 
     public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
         switch result {
@@ -68,32 +75,45 @@ public class FreeNetworkClient {
         dataTask = session.dataTask(with: URLRequest(url: url)) {
             [self] (requestedData: Data?, response: URLResponse?, error: Error?) -> Void in
 
-            // Read answer
+            // Answer
 
             var answerData: Data?
-            var answerError: String?
+            var answerError: NetworkClientError?
+
+            // Check Status
 
             if let error = error {
-                answerError = error.localizedDescription
-            } else if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                answerError = HTTPURLResponse.localizedString(
-                    forStatusCode: response.statusCode)
-            } else if let requestedData = requestedData {
+                answerError = .failedResponse(error.localizedDescription)
+            }
+
+            if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                if statusCode == 404 {
+                    answerError = .statusCode404
+                } else if statusCode != 200 {
+                    answerError = .failedResponse(
+                        HTTPURLResponse.localizedString(forStatusCode: statusCode))
+                }
+            } else {
+                answerError = .failedResponse("No Status Code")
+            }
+
+            // Check Data
+
+            if requestedData == nil {
+                answerError = .failedResponse("No Data")
+            } else {
                 answerData = requestedData
             }
 
-            // Communicate changes
+            // Communicate Changes
 
-            DispatchQueue.main.async {
-
-                if let requestedData = answerData {
-                    self.networkData = requestedData
-                } else if let error = answerError {
-                    self.onDataGiven(.failure(.failedRequest(error)))
-                }
-
-                self.dataTask = nil
+            if let error = answerError {
+                self.onDataGiven(.failure(error))
+            } else if let data = answerData {
+                self.networkData = data
             }
+
+            self.dataTask = nil
         }
 
         dataTask?.resume()

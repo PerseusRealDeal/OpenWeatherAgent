@@ -11,15 +11,15 @@
 //
 
 import XCTest
+@testable import OpenWeatherFreeClient
 
-struct TestError: LocalizedError {
-    let message: String?
-    var errorDescription: String? { return message }
+class DummyURLSessionDataTask: URLSessionDataTaskProtocol {
+    func resume() {
+        log.message("[\(type(of: self))].\(#function)")
+    }
 }
 
-class DummyURLSessionDataTask: URLSessionDataTask { override func resume() { } }
-
-class MockURLSession: URLSession {
+class MockURLSession: URLSessionProtocol {
 
     // for network request testing
     var dataTaskCallCount: Int = 0
@@ -28,17 +28,36 @@ class MockURLSession: URLSession {
     // for network response testing
     var dataTaskArgsCompletionHandler: [(Data?, URLResponse?, Error?) -> Void] = []
 
-    override func dataTask(with request: URLRequest, completionHandler: @escaping
-        (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    #if os(macOS)
+    func dataTask(with request: URLRequest, completionHandler: @escaping
+        (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
 
-        dataTaskCallCount += 1
-        dataTaskArgsRequest.append(request)
-
-        // only for network response testing
+        appendRequest(request: request)
         dataTaskArgsCompletionHandler.append(completionHandler)
 
+        // return self.session.dataTask(with: request)
         return DummyURLSessionDataTask()
+        // return session.dataTask(with: URLRequest(url: URL(string: "http://DUMMY")!))
     }
+    #else
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable
+        (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+
+        appendRequest(request: request)
+        dataTaskArgsCompletionHandler.append(completionHandler)
+
+        // return self.session.dataTask(with: request)
+        return DummyURLSessionDataTask()
+        // return session.dataTask(with: URLRequest(url: URL(string: "http://DUMMY")!))
+    }
+    #endif
+
+    private func appendRequest(request: URLRequest) {
+        dataTaskCallCount += 1
+        dataTaskArgsRequest.append(request)
+    }
+
+    // MARK: - Verifier methods
 
     internal func verifyDataTask(with request: URLRequest,
                                  file: StaticString = #file,

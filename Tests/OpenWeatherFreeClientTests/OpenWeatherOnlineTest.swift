@@ -29,7 +29,7 @@ extension OpenWeatherFreeClientTests {
 
     #if false
 
-    func test_onDataGiven_called_with_network_connection() {
+    func testOpenWeatherFreeClient_RealNetworkConnection() {
 
         // arrange
 

@@ -13,19 +13,30 @@
 import XCTest
 @testable import OpenWeatherFreeClient
 
-// The API Client checks
+// The API client unit tests
 
 final class OpenWeatherFreeClientTests: XCTestCase {
 
+    var sut: OpenWeatherFreeClient!
+    var mockURLSession: MockURLSession!
+
+    override func setUp() {
+        sut = OpenWeatherFreeClient()
+        mockURLSession = MockURLSession()
+    }
+
+    override func tearDown() {
+        mockURLSession = nil
+        sut = nil
+
+        super.tearDown()
+    }
+
     // func test_zero() { XCTFail("Tests not yet implemented in \(type(of: self)).") }
 
-    func test_the_first_success() { XCTAssertTrue(true, "It's done!") }
+    func testTheFirstSuccess() { XCTAssertTrue(true, "It's done!") }
 
-    func test_OpenWeatherClient_init() {
-
-        // arrange
-
-        let sut = OpenWeatherFreeClient()
+    func testOpenWeatherClient_Init() {
 
         // assert
 
@@ -36,12 +47,11 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         XCTAssertTrue(sut.networkData == Data())
     }
 
-    func test_OpenWeatherClient_should_make_data_task() {
+    func testOpenWeatherClient_DataTask_Right() {
 
         // arrange
 
-        let mock = MockURLSession()
-        let sut = OpenWeatherFreeClient(mock)
+        sut.session = mockURLSession
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
 
         // act
@@ -50,10 +60,11 @@ final class OpenWeatherFreeClientTests: XCTestCase {
 
         // assert
 
-        mock.verifyDataTask(with: URLRequest(url: URL(string: dummyCallDetails.urlString)!))
+        mockURLSession.verifyDataTask(
+            with: URLRequest(url: URL(string: dummyCallDetails.urlString)!))
     }
 
-    func test_OpenWeatherClient_should_throw_exception_with_invalid_url() {
+    func testOpenWeatherClient_URL_Exception() {
 
         // arrange
 
@@ -69,16 +80,15 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         }
     }
 
-    func test_OpenWeatherClient_should_give_no_data_if_error() {
+    func testOpenWeatherClient_No_Data() {
 
         // arrange
 
-        let mock = MockURLSession()
-        let sut = OpenWeatherFreeClient(mock)
+        sut.session = mockURLSession
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
 
         let expectedFailure: Result<Data, NetworkClientError> =
-            .failure(.failedRequest("DUMMY"))
+            .failure(.failedResponse("No Data"))
         var actualFailure: Result<Data, NetworkClientError> =
             .success(Data())
 
@@ -93,7 +103,7 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // simulate request
         try? sut.call(with: dummyCallDetails)
         // simulate response
-        mock.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "DUMMY"))
+        mockURLSession.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "DUMMY"))
 
         waitForExpectations(timeout: 0.01)
 
@@ -103,21 +113,18 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         XCTAssertEqual(String(describing: actualFailure), String(describing: expectedFailure))
     }
 
-    func test_OpenWeatherClient_withResponse_statusCodeNot200_shouldReportFailure() {
+    func testOpenWeatherClient_StatusCodeNot200Not404() {
 
         // arrange
 
-        let mock = MockURLSession()
-        let sut = OpenWeatherFreeClient(mock)
+        sut.session = mockURLSession
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
 
         let status_code = 404
-        let message = HTTPURLResponse.localizedString(forStatusCode: status_code)
+        // let message = HTTPURLResponse.localizedString(forStatusCode: status_code)
 
-        let expectedFailure: Result<Data, NetworkClientError> =
-            .failure(.failedRequest(message))
-        var actualFailure: Result<Data, NetworkClientError> =
-            .success(Data())
+        let expectedFailure: Result<Data, NetworkClientError> = .failure(.statusCode404)
+        var actualFailure: Result<Data, NetworkClientError> = .success(Data())
 
         let happiness = loadTestJsonData()
 
@@ -132,8 +139,8 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // simulate request
         try? sut.call(with: dummyCallDetails)
         // simulate response
-        mock.dataTaskArgsCompletionHandler.first?(happiness,
-                                                  response(statusCode: status_code), nil)
+        mockURLSession.dataTaskArgsCompletionHandler.first?(
+            happiness, response(statusCode: status_code), nil)
 
         waitForExpectations(timeout: 0.01)
 
@@ -144,12 +151,13 @@ final class OpenWeatherFreeClientTests: XCTestCase {
                        String(describing: expectedFailure))
     }
 
-    func test_OpenWeatherClient_should_give_data_with_statusCode200_and_no_error() {
+    func testOpenWeatherClient_StatusCode200() {
 
         // arrange
 
         let mock = MockURLSession()
-        let sut = OpenWeatherFreeClient(mock)
+        let sut = OpenWeatherFreeClient()
+        sut.session = mock
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
 
         let happiness = loadTestJsonData()
@@ -178,6 +186,4 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         XCTAssertEqual(sut.data, happiness)
         XCTAssertEqual(String(describing: actualData), String(describing: expectedData))
     }
-
-    // MARK: - The API Response checks
 }

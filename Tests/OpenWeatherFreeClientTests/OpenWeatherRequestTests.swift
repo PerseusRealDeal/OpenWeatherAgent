@@ -19,7 +19,7 @@ final class OpenWeatherRequestTests: XCTestCase {
 
     // func test_zero() { XCTFail("Tests not yet implemented in \(type(of: self)).") }
 
-    func test_OpenWeather_call_default_schemes() {
+    func testOpenWeatherRequest_Default_URL() {
 
         // arrange
 
@@ -31,7 +31,7 @@ final class OpenWeatherRequestTests: XCTestCase {
         XCTAssertEqual(requirement, sut)
     }
 
-    func test_OpenWeather_call_details_default_init() {
+    func testOpenWeatherRequest_Default_Init() {
 
         // arrange
 
@@ -47,7 +47,7 @@ final class OpenWeatherRequestTests: XCTestCase {
 
     }
 
-    func test_OpenWeather_call_all_details_in_use() {
+    func testOpenWeatherRequest_All_URL_Parameters() {
 
         // arrange
 
