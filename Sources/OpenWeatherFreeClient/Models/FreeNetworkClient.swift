@@ -84,17 +84,17 @@ public class FreeNetworkClient {
 
             if let error = error {
                 answerError = .failedResponse(error.localizedDescription)
-            }
-
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if statusCode == 404 {
-                    answerError = .statusCode404
-                } else if statusCode != 200 {
-                    answerError = .failedResponse(
-                        HTTPURLResponse.localizedString(forStatusCode: statusCode))
-                }
             } else {
-                answerError = .failedResponse("No Status Code")
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                    if statusCode == 404 {
+                        answerError = .statusCode404
+                    } else if statusCode != 200 {
+                        answerError = .failedResponse(
+                            HTTPURLResponse.localizedString(forStatusCode: statusCode))
+                    }
+                } else {
+                    answerError = .failedResponse("No Status Code")
+                }
             }
 
             // Check Data
