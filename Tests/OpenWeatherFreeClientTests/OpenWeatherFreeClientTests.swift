@@ -87,14 +87,12 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         sut.session = mockURLSession
         let dummyCallDetails = OpenWeatherDetails(appid: "code")
 
-        let expectedFailure: Result<Data, NetworkClientError> =
-            .failure(.failedResponse("No Data"))
-        var actualFailure: Result<Data, NetworkClientError> =
-            .success(Data())
+        let expectedData: Result<Data, NetworkClientError> = .success(Data())
+        var actualData: Result<Data, NetworkClientError> = .failure(.statusCode404)
 
         let onDataGivenInvoked = expectation(description: "onDataGiven closure invoked")
         sut.onDataGiven = { result in
-            actualFailure = result
+            actualData = result
             onDataGivenInvoked.fulfill()
         }
 
@@ -103,14 +101,14 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // simulate request
         try? sut.call(with: dummyCallDetails)
         // simulate response
-        mockURLSession.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "DUMMY"))
+        mockURLSession.dataTaskArgsCompletionHandler.first?(nil, response(statusCode: 200), nil)
 
         waitForExpectations(timeout: 0.01)
 
         // assert
 
         XCTAssertEqual(sut.data, Data())
-        XCTAssertEqual(String(describing: actualFailure), String(describing: expectedFailure))
+        XCTAssertEqual(String(describing: actualData), String(describing: expectedData))
     }
 
     func testOpenWeatherClient_StatusCodeNot200Not404() {

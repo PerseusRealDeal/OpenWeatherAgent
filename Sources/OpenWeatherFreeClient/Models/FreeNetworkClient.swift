@@ -84,26 +84,25 @@ public class FreeNetworkClient {
 
             if let error = error {
                 answerError = .failedResponse(error.localizedDescription)
+                // WRONG: https://apiiiii.openweathermap.org/...
             } else {
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                     if statusCode == 404 {
                         answerError = .statusCode404
+                        // WRONG: https://api.openweathermap.org/data/999/...
                     } else if statusCode != 200 {
                         answerError = .failedResponse(
                             HTTPURLResponse.localizedString(forStatusCode: statusCode))
+                        // WRONG: https://api.openweathermap.org/...&appid=wrong_api_key
                     }
                 } else {
                     answerError = .failedResponse("No Status Code")
                 }
             }
 
-            // Check Data
+            // Data
 
-            if requestedData == nil {
-                answerError = .failedResponse("No Data")
-            } else {
-                answerData = requestedData
-            }
+            answerData = requestedData ?? Data()
 
             // Communicate Changes
 
