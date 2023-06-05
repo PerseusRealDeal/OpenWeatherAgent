@@ -155,7 +155,7 @@ Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
 - The year starts from the creation of the world according to a Slavic calendar
 - September, the 1st of Slavic year
 
-Have a look at [LICENSE](/LICENSE) for details.
+[LICENSE](/LICENSE) for details.
 
 # Author
 
