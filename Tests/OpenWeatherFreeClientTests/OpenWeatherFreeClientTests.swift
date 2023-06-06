@@ -101,7 +101,9 @@ final class OpenWeatherFreeClientTests: XCTestCase {
         // simulate request
         try? sut.call(with: dummyCallDetails)
         // simulate response
-        mockURLSession.dataTaskArgsCompletionHandler.first?(nil, response(statusCode: 200), nil)
+        mockURLSession.dataTaskArgsCompletionHandler.first?(nil,
+                                                            response(statusCode: 200),
+                                                            nil)
 
         waitForExpectations(timeout: 0.01)
 

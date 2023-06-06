@@ -142,7 +142,7 @@ public class FreeNetworkClient {
 
             self.dataTask = nil
         }
-        
+
         dataTask?.resume()
     }
 }
