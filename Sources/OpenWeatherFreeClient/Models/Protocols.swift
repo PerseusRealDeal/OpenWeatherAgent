@@ -25,7 +25,7 @@ extension URLSession: URLSessionProtocol {
     #else // iOS, tvOS, watchOS
     public func dataTask(
         with request: URLRequest,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
+        completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
     ) -> URLSessionDataTaskProtocol {
         return (dataTask(with: request, completionHandler: completionHandler)
                 as URLSessionDataTask) as URLSessionDataTaskProtocol
@@ -44,7 +44,7 @@ public protocol URLSessionProtocol {
     #else // iOS, tvOS, watchOS
     func dataTask(
         with request: URLRequest,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
+        completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
     ) -> URLSessionDataTaskProtocol
     #endif
 }
