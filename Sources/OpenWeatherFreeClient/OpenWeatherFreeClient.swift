@@ -10,6 +10,15 @@
 //  All rights reserved.
 //
 
-struct OpenWeatherFreeClient {
-    var text = "Hello, World!"
+import Foundation
+
+public class OpenWeatherFreeClient: FreeNetworkClient {
+
+    public func call(with respect: OpenWeatherDetails) throws {
+        guard let requestURL = URL(string: respect.urlString) else {
+            throw NetworkClientError.invalidUrl
+        }
+
+        requestData(url: requestURL)
+    }
 }
