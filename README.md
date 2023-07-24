@@ -17,11 +17,11 @@
 [![CocoaPods manager](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager)
 
-## In Brief
+# In Brief
 
-> This library lets a developer perform the network calls requesting weather data available for free with [OpenWeather API](https://openweathermap.org). It contains the implementation of [`Current Weather Data`](https://openweathermap.org/current) and [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) of the API. 
+> This library lets a developer perform the network calls requesting weather data available for free with `OpenWeather API`. It contains the implementation of `Current Weather Data` and `5 Day / 3 Hour Forecast` of the API. 
 
-> [Individual API key](https://openweathermap.org/appid) is required.
+> `Individual API key` is required.
 
 # Requirements
 
@@ -39,6 +39,52 @@
 
 - [SwiftLint Shell Script Runner](/SucceedsPostAction.sh)
 - [SwiftLint](https://github.com/realm/SwiftLint) / [0.31.0: Busy Laundromat](https://github.com/realm/SwiftLint/releases/tag/0.31.0) for macOS High Sierra
+
+# Installation
+
+> Using "Exact" with the Version field is strongly recommended.
+
+## Standalone 
+
+Make a copy of the file [`OpenWeatherStar.swift`](/OpenWeatherStar.swift) then put it into a place required of a host project.
+
+## Carthage
+
+Cartfile should contain:
+
+```carthage
+github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.0
+```
+
+Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
+
+## CocoaPods
+
+Podfile should contain:
+
+```ruby
+target "ProjectTarget" do
+  use_frameworks!
+  pod 'OpenWeatherFreeClient', '0.1.0'
+end
+```
+
+## Swift Package Manager
+
+- As a package dependency so Package.swift should contain the following statements:
+
+```swift
+dependencies: [
+        .package(url: "https://github.com/perseusrealdeal/OpenWeatherFreeClient.git",
+            .exact("0.1.0"))
+    ],
+```
+
+- As an Xcode project dependency: 
+
+`Project in the Navigator > Package Dependencies > Add Package Dependency`
+
+> Using "Exact" with the Version field is strongly recommended.
 
 # Usage
 
@@ -101,50 +147,6 @@ client.onDataGiven = { result in
 
 try? client.call(with: callDetails)
 ```
-
-# Installation
-
-## Standalone 
-
-Make a copy of the file [`OpenWeatherStar.swift`](/OpenWeatherStar.swift) then put it into a place required of a host project.
-
-## Carthage
-
-Cartfile should contain:
-
-```carthage
-github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.0
-```
-
-Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
-
-## CocoaPods
-
-Podfile should contain:
-
-```ruby
-target "ProjectTarget" do
-  use_frameworks!
-  pod 'OpenWeatherFreeClient', '0.1.0'
-end
-```
-
-## Swift Package Manager
-
-- As a package dependency so Package.swift should contain the following statements:
-
-```swift
-dependencies: [
-        .package(url: "https://github.com/perseusrealdeal/OpenWeatherFreeClient.git",
-            .exact("0.1.0"))
-    ],
-```
-
-- As an Xcode project dependency: 
-
-`Project in the Navigator > Package Dependencies > Add Package Dependency`
-
-Using "Exact" with the Version field is strongly recommended.
 
 # License MIT
 
