@@ -3,8 +3,8 @@
 > OpenWeatherMap Free API Client released as the component for both macOS and iOS apps as well.
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions)
-![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)
-[![Pod](https://img.shields.io/badge/Pod-0.1.0-informational.svg)](/OpenWeatherFreeClient.podspec)
+![Version](https://img.shields.io/badge/Version-0.1.1-green.svg)
+[![Pod](https://img.shields.io/badge/Pod-0.1.1-informational.svg)](/OpenWeatherFreeClient.podspec)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS%209.3+_|_macOS%2010.9+-orange.svg)](https://en.wikipedia.org/wiki/IOS_9)
 [![Xcode 10.1](https://img.shields.io/badge/Xcode-10.1+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
 [![Swift 4.2](https://img.shields.io/badge/Swift-4.2-red.svg)](https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html)
@@ -53,7 +53,7 @@ Make a copy of the file [`OpenWeatherStar.swift`](/OpenWeatherStar.swift) then p
 Cartfile should contain:
 
 ```carthage
-github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.0
+github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.1
 ```
 
 Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
@@ -65,7 +65,7 @@ Podfile should contain:
 ```ruby
 target "ProjectTarget" do
   use_frameworks!
-  pod 'OpenWeatherFreeClient', '0.1.0'
+  pod 'OpenWeatherFreeClient', '0.1.1'
 end
 ```
 
@@ -76,7 +76,7 @@ end
 ```swift
 dependencies: [
         .package(url: "https://github.com/perseusrealdeal/OpenWeatherFreeClient.git",
-            .exact("0.1.0"))
+            .exact("0.1.1"))
     ],
 ```
 
