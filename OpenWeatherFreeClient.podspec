@@ -1,7 +1,7 @@
 Pod::Spec.new do |p|
 
 p.name           = "OpenWeatherFreeClient"
-p.version        = "0.1.0"
+p.version        = "0.1.1"
 p.summary        = "OpenWeather free API client for macOS/iOS."
 p.description    = "OpenWeatherMap data provider, free API client for macOS/iOS."
 p.homepage       = "https://github.com/perseusrealdeal/OpenWeatherFreeClient"
