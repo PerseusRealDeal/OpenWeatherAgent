@@ -1,16 +1,19 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.1.1
+//  Version: 1.0.0
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
+//
 //  All rights reserved.
 //
 //
 //  MIT License
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
 //
 //  The year starts from the creation of the world according to a Slavic calendar.
 //  September, the 1st of Slavic year.

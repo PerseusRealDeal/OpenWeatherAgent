@@ -1,11 +1,12 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.7
 
 /* Package.swift
- Version: 0.1.1
+ Version: 1.0.0
 
  Created by Mikhail Zhigulin in 7531.
 
- Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+ Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+ Copyright © 7533 PerseusRealDeal
 
  Licensed under the MIT license. See LICENSE file.
  All rights reserved.
