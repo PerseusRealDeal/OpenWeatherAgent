@@ -1,6 +1,6 @@
 //
-//  FreeNetworkClient.swift
-//  OpenWeatherFreeClient
+//  NetworkClientFree.swift
+//  OpenWeatherAgent
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -9,8 +9,6 @@
 //
 //  Licensed under the MIT license. See LICENSE file.
 //  All rights reserved.
-//
-// swiftlint:disable closure_parameter_position
 //
 
 import Foundation
@@ -22,12 +20,7 @@ public enum NetworkClientError: Error, Equatable {
     case failedResponse(String)
 }
 
-public enum Result<Value, Error: Swift.Error> {
-    case success(Value)
-    case failure(Error)
-}
-
-public class FreeNetworkClient {
+public class NetworkClientFree {
 
     #if DEBUG
     private(set) var dataTask: URLSessionDataTaskProtocol?
@@ -40,19 +33,20 @@ public class FreeNetworkClient {
     public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
         switch result {
         case .success(let weatherData):
-            log.message("""
-            — Default closure invoked! \(#function): \(result)
-              DATA: BEGIN
-              \(String(decoding: weatherData, as: UTF8.self))
-              DATA: END
-            """)
+            log.message("[FreeNetworkClient].\(#function):\(result)")
         case .failure(let error):
+            var errStr = ""
             switch error {
-            case .failedRequest(let message):
-                log.message(message, .error)
-            default:
-                break
+            case .failedRequest(let errText):
+                errStr = errText
+            case .failedResponse(let errText):
+                errStr = errText
+            case .invalidUrl:
+                errStr = "invalidUrl"
+            case .statusCode404:
+                errStr = "statusCode404"
             }
+            log.message("[FreeNetworkClient].\(#function): \(errStr)", .error)
         }
     }
 
@@ -64,17 +58,14 @@ public class FreeNetworkClient {
     }
 
     public init(_ session: URLSession = URLSession.shared) {
-        self.session = session
-
         log.message("[\(type(of: self))].\(#function)")
+        self.session = session
     }
 
     internal func requestData(url: URL) {
-
-        log.message("[\(type(of: self))].\(#function)")
-
         dataTask = session.dataTask(with: URLRequest(url: url)) {
-            [self] (requestedData: Data?, response: URLResponse?, error: Error?) -> Void in
+            // swiftlint:disable:next closure_parameter_position
+            [self] (requestedData: Data?, response: URLResponse?, error: Error?) in
 
             // Answer
 

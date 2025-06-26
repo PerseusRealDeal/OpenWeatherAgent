@@ -1,6 +1,6 @@
 //
-//  OpenWeatherFreeClient.swift
-//  OpenWeatherFreeClient
+//  OpenWeatherClient.swift
+//  OpenWeatherClient
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -13,9 +13,9 @@
 
 import Foundation
 
-public class OpenWeatherFreeClient: FreeNetworkClient {
+public class OpenWeatherClient: NetworkClientFree {
 
-    public func call(with respect: OpenWeatherDetails) throws {
+    public func call(with respect: OpenWeatherRequestData) throws {
         guard let requestURL = URL(string: respect.urlString) else {
             throw NetworkClientError.invalidUrl
         }

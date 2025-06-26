@@ -5,25 +5,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Dates in this file meets Gregorian calendar. Date in format YYYY-MM-DD.
 
-## [0.1.0] - [Unreleased], Developer Release
-
-### Added
-
-- Feature (#NN).
-- Feature (#NN).
-- Option (#NN).
-- Screen (#NN).
-- Fun Spec (#NN).
-
-### Security
-
-- To keep Something in safe (#NN).
+## [0.2.0] - [2025-06-26], OpenWeather Agent
 
 ### Changed
 
-- Project specifics (#NN).
+- Package Manager: SPM only.
 
-## [0.0.1] - [YYYY-MM-DD], Developer Beginning Release
+### Added
+
+- Minor changes.
+- Changelog doc.
+- GitHub SwiftLint test status for Source Code.
+
+### Upgraded
+
+- PerseusLogger to [CPL v1.5.0](https://github.com/perseusrealdeal/ConsolePerseusLogger).
+
+## [0.1.1] - [2023-07-24], Developer Release
+
+### Added
+
+- CocoaPods support.
+
+## [0.1.0] - [2023-07-24], Developer Release
+
+### Added
+
+- Current weather request.
+- Forecast request.
+
+## [0.0.1] - [2023-02-25], Developer Beginning Release
 
 ### Added
 

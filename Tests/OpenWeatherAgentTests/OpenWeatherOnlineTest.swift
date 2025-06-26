@@ -1,6 +1,6 @@
 //
 //  OpenWeatherOnlineTest.swift
-//  OpenWeatherFreeClientTests
+//  OpenWeatherAgentTests
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -12,7 +12,7 @@
 //
 
 import XCTest
-@testable import OpenWeatherFreeClient
+@testable import OpenWeatherAgent
 
 // The API Client checks
 
@@ -21,23 +21,23 @@ import XCTest
  Instructions:
 
  step 1: change #if from false to true
- step 2: give a real api key
+ step 2: give it a real api key
  step 3: run test
 
 */
 
-extension OpenWeatherFreeClientTests {
+extension OpenWeatherAgentTests {
 
-    #if false
+    #if false // 1. true to unlock, false to lock
 
-    func testOpenWeatherFreeClient_RealNetworkConnection() {
+    func test_OpenWeatherAgent_real_network_connection() { // 3. Run
 
         // arrange
 
-        let apikey = "The API key"
+        let apikey = "" // 2. The API key
 
-        let client = OpenWeatherFreeClient()
-        let callDetails = OpenWeatherDetails(appid: apikey)
+        let client = OpenWeatherAgent()
+        let callDetails = OpenWeatherRequestData(appid: apikey)
 
         let onDataGivenInvoked = expectation(description: "onDataGiven closure invoked")
 
@@ -45,19 +45,20 @@ extension OpenWeatherFreeClientTests {
 
             switch result {
             case .success(let weatherData):
-                log.message("""
-                    \(#function)
-                    DATA: BEGIN
-                    \(String(decoding: weatherData, as: UTF8.self))
-                    DATA: END
-                    """)
+                log.message("OpenWeatherAgentTests:\(#function):\(result)")
             case .failure(let error):
+                var errStr = ""
                 switch error {
-                case .failedRequest(let message):
-                    log.message(message, .error)
-                default:
-                    break
+                case .failedRequest(let errText):
+                    errStr = errText
+                case .failedResponse(let errText):
+                    errStr = errText
+                case .invalidUrl:
+                    errStr = "invalidUrl"
+                case .statusCode404:
+                    errStr = "statusCode404"
                 }
+                log.message("OpenWeatherAgentTests:\(#function): \(errStr)", .error)
             }
 
             onDataGivenInvoked.fulfill()

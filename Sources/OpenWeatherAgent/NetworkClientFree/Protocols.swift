@@ -1,6 +1,6 @@
 //
 //  Protocols.swift
-//  OpenWeatherFreeClient
+//  OpenWeatherAgent
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -45,7 +45,7 @@ public protocol URLSessionProtocol {
     #else // iOS, tvOS, watchOS
     func dataTask(
         with request: URLRequest,
-        completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
     ) -> URLSessionDataTaskProtocol
     #endif
 }

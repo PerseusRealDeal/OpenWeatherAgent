@@ -8,68 +8,68 @@ on:
     branches: [ main ]
 #  schedule:
 #    - cron: '5 5 * * 5'
-   
+
 jobs:
 
   macOS-build:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
-    - name: Select Xcode 15.4
-      run: sudo xcode-select -s "/Applications/Xcode_15.4.app"
-    - uses: mxcl/xcodebuild@v3.3
+    - name: Select Xcode 14.2
+      run: sudo xcode-select -s "/Applications/Xcode_14.2.app"
+    - uses: mxcl/xcodebuild@v3
       with:
         platform: macOS
-        scheme: 'OpenWeatherFreeClient'
+        scheme: 'OpenWeatherAgent'
         action: build
         code-coverage: true
         verbosity: xcpretty
         upload-logs: always
 
   macOS-test:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
-    - name: Select Xcode 15.4
-      run: sudo xcode-select -s "/Applications/Xcode_15.4.app"
-    - uses: mxcl/xcodebuild@v3.3
+    - name: Select Xcode 14.2
+      run: sudo xcode-select -s "/Applications/Xcode_14.2.app"
+    - uses: mxcl/xcodebuild@v3
       with:
         platform: macOS
-        scheme: 'OpenWeatherFreeClient'
+        scheme: 'OpenWeatherAgent'
         action: test
         code-coverage: true
         verbosity: xcpretty
         upload-logs: always
 
   iOS-build:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
-    - name: Select Xcode 15.4
-      run: sudo xcode-select -s "/Applications/Xcode_15.4.app"
-    - uses: mxcl/xcodebuild@v3.3
+    - name: Select Xcode 14.2
+      run: sudo xcode-select -s "/Applications/Xcode_14.2.app"
+    - uses: mxcl/xcodebuild@v3
       with:
         platform: iOS
-        scheme: 'OpenWeatherFreeClient'
+        scheme: 'OpenWeatherAgent'
         action: build
         code-coverage: true
         verbosity: xcpretty
         upload-logs: always
 
   iOS-test:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
-    - name: Select Xcode 15.4
-      run: sudo xcode-select -s "/Applications/Xcode_15.4.app"
-    - uses: mxcl/xcodebuild@v3.3
+    - name: Select Xcode 14.2
+      run: sudo xcode-select -s "/Applications/Xcode_14.2.app"
+    - uses: mxcl/xcodebuild@v3
       with:
         platform: iOS
-        scheme: 'OpenWeatherFreeClient'
+        scheme: 'OpenWeatherAgent'
         action: test
         code-coverage: true
         verbosity: xcpretty

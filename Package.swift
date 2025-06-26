@@ -1,7 +1,7 @@
 // swift-tools-version:5.7
 
 /* Package.swift
- Version: 1.0.0
+ Version: 0.2.0
 
  Created by Mikhail Zhigulin in 7531.
 
@@ -12,17 +12,21 @@
  All rights reserved.
 
  Abstract:
- Package manifest for an App component.
+ Package manifest for the OpenWeather Agent.
 */
 
 import PackageDescription
 
 let package = Package(
-    name: "OpenWeatherFreeClient",
+    name: "OpenWeatherAgent",
+    platforms: [
+        .macOS(.v10_13),
+        .iOS(.v11)
+    ],
     products: [
         .library(
-            name: "OpenWeatherFreeClient",
-            targets: ["OpenWeatherFreeClient"])
+            name: "OpenWeatherAgent",
+            targets: ["OpenWeatherAgent"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -30,10 +34,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OpenWeatherFreeClient",
+            name: "OpenWeatherAgent",
             dependencies: []),
         .testTarget(
-            name: "OpenWeatherFreeClientTests",
-            dependencies: ["OpenWeatherFreeClient"])
+            name: "OpenWeatherAgentTests",
+            dependencies: ["OpenWeatherAgent"])
     ]
 )

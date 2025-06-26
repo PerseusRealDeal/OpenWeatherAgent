@@ -1,6 +1,6 @@
 //
 //  TestError.swift
-//  OpenWeatherFreeClientTests
+//  OpenWeatherAgentTests
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
