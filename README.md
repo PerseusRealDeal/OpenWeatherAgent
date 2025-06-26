@@ -1,164 +1,192 @@
-# OpenWeatherFreeClient — Xcode 10.1+
+# OpenWeatherAgent — Xcode 14.2+
 
-> OpenWeatherMap Free API Client released as the component for both macOS and iOS apps as well.
+> [`Weather-MenuBar-App for macOS`](https://github.com/perseusrealdeal/TheDarkMoon)<br/>
 
-[![Actions Status](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherFreeClient/actions)
-![Version](https://img.shields.io/badge/Version-0.1.1-green.svg)
-[![Pod](https://img.shields.io/badge/Pod-0.1.1-informational.svg)](/OpenWeatherFreeClient.podspec)
-[![Platforms](https://img.shields.io/badge/Platforms-iOS%209.3+_|_macOS%2010.9+-orange.svg)](https://en.wikipedia.org/wiki/IOS_9)
-[![Xcode 10.1](https://img.shields.io/badge/Xcode-10.1+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
-[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-red.svg)](https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html)
+> OpenWeatherMap API Client requests with `<https://api.openweathermap.org/data/2.5/>`. `Individual API key` is required.<br/>
+
+> - To request current weather.<br/>
+> - To request `5 Day / 3 Hour` forecast.<br/>
+
+> `OpenWeatherAgent` is a single author and personale solution developed in `person-to-person` relationship paradigm.
+
+[![Actions Status](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml)
+[![Style](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml)
+[![Version](https://img.shields.io/badge/Version-0.2.0-green.svg)](/CHANGELOG.md)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS%2010.13+Cocoa_|_iOS%2011.0+UIKit-orange.svg)](https://en.wikipedia.org/wiki/List_of_Apple_products)
+[![Xcode 14.2](https://img.shields.io/badge/Xcode-14.2+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
+[![Swift 5.7](https://img.shields.io/badge/Swift-5.7-red.svg)](https://www.swift.org)
 [![License](http://img.shields.io/:License-MIT-blue.svg)](/LICENSE)
 
 ## Integration Capabilities
 
-[![Standalone](https://img.shields.io/badge/Standalone%20-available-informational.svg)](/OpenWeatherStar.swift)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
-[![CocoaPods manager](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg)](https://cocoapods.org)
-[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](https://github.com/apple/swift-package-manager)
+[![Standalone](https://img.shields.io/badge/Standalone-available-informational.svg)](/OpenWeatherStar.swift)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg)](/Package.swift)
 
-# In Brief
+> Use Stars to adopt [`OpenWeatherAgent`](/OpenWeatherStar.swift) for the specifics you need.
 
-> This library lets a developer perform the network calls requesting weather data available for free with `OpenWeather API`. It contains the implementation of `Current Weather Data` and `5 Day / 3 Hour Forecast` of the API. 
+## Dependencies
 
-> `Individual API key` is required.
+[![ConsolePerseusLogger](http://img.shields.io/:ConsolePerseusLogger-1.5.0-green.svg)](https://github.com/perseusrealdeal/ConsolePerseusLogger.git)
 
-# Requirements
+# Approbation Matrix
 
-- [macOS 10.13.6+](https://apps.apple.com/us/app/macos-high-sierra/id1246284741?ls=1)
-- [Xcode 10.1+](https://stackoverflow.com/questions/10335747/how-to-download-xcode-dmg-or-xip-file)
-- Swift 4.2+
-- iOS: 9.3+, UIKit SDK
-- macOS: 10.9+, AppKit SDK
+<!-- [`A3 Environment and Approbation`](/APPROBATION.md) / [`CHANGELOG`](/CHANGELOG.md) for details. -->
+
+> [`CHANGELOG`](/CHANGELOG.md) for details.
+
+# In brief > Idea to use, the Why
+
+> There're so many things happen unexpectedly... and weather is the most one.
+
+# Build system requirements
+
+- [macOS Monterey 12.7.6+](https://apps.apple.com/by/app/macos-monterey/id1576738294) / [Xcode 14.2+](https://developer.apple.com/services-account/download?path=/Developer_Tools/Xcode_14.2/Xcode_14.2.xip)
+
+> But as the single source code file [OpenWeatherStar.swift](/OpenWeatherStar.swift) PDM can be used even in Xcode 10.1.
 
 # First-party software
 
-- [PerseusLogger](https://gist.github.com/perseusrealdeal/df456a9825fcface44eca738056eb6d5)
+| Type | Name                                                                                                                                                                  | License |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| Star | [ConsolePerseusLogger](https://github.com/perseusrealdeal/ConsolePerseusLogger) / [1.5.0](https://github.com/perseusrealdeal/ConsolePerseusLogger/releases/tag/1.5.0) | MIT     |
 
 # Third-party software
 
-- [SwiftLint Shell Script Runner](/SucceedsPostAction.sh)
-- [SwiftLint](https://github.com/realm/SwiftLint) / [0.31.0: Busy Laundromat](https://github.com/realm/SwiftLint/releases/tag/0.31.0) for macOS High Sierra
+| Type   | Name                                                                                                                              | License                            |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Style  | [SwiftLint](https://github.com/realm/SwiftLint) / [v0.57.0 for Monterey+](https://github.com/realm/SwiftLint/releases/tag/0.57.0) | MIT                                |
+| Script | [SwiftLint Shell Script](/SucceedsPostAction.sh) to run SwiftLint                                                                 | MIT                                |
+| Action | [mxcl/xcodebuild@v3](https://github.com/mxcl/xcodebuild)                                                                          | [Unlicense](https://unlicense.org) |
+| Action | [cirruslabs/swiftlint-action@v1](https://github.com/cirruslabs/swiftlint-action/)                                                 | MIT                                |
 
 # Installation
 
-> Using "Exact" with the Version field is strongly recommended.
+> Standalone: the single source code file [OpenWeatherStar.swift](/OpenWeatherStar.swift)
 
-## Standalone 
-
-Make a copy of the file [`OpenWeatherStar.swift`](/OpenWeatherStar.swift) then put it into a place required of a host project.
-
-## Carthage
-
-Cartfile should contain:
-
-```carthage
-github "perseusrealdeal/OpenWeatherFreeClient" == 0.1.1
-```
-
-Some Carthage usage tips placed [here](https://gist.github.com/perseusrealdeal/8951b10f4330325df6347aaaa79d3cf2).
-
-## CocoaPods
-
-Podfile should contain:
-
-```ruby
-target "ProjectTarget" do
-  use_frameworks!
-  pod 'OpenWeatherFreeClient', '0.1.1'
-end
-```
-
-## Swift Package Manager
-
-- As a package dependency so Package.swift should contain the following statements:
-
-```swift
-dependencies: [
-        .package(url: "https://github.com/perseusrealdeal/OpenWeatherFreeClient.git",
-            .exact("0.1.1"))
-    ],
-```
-
-- As an Xcode project dependency: 
-
-`Project in the Navigator > Package Dependencies > Add Package Dependency`
-
-> Using "Exact" with the Version field is strongly recommended.
+> Swift Package Manager: `https://github.com/perseusrealdeal/OpenWeatherAgent`
 
 # Usage
 
-## Call Current Weather
+## Request Current Weather
 
 ```swift
+
 let apikey = "The API key"
 
-let client = OpenWeatherFreeClient()
-let callDetails = OpenWeatherDetails(appid: apikey)
+let client = OpenWeatherClient()
+let callDetails = OpenWeatherRequestData(appid: apikey)
 
 client.onDataGiven = { result in
 
-  switch result {
+    switch result {
     case .success(let weatherData):
-      print("""
-        DATA: BEGIN
-        \(String(decoding: weatherData, as: UTF8.self))
-        DATA: END
-      """)
+        log.message("[OpenWeatherAgent]\(#function):\(result)")
     case .failure(let error):
-      switch error {
-       case .failedRequest(let message):
-         print(message)
-       default:
-         break
-      }
+        var errStr = ""
+        switch error {
+        case .failedRequest(let errText):
+            errStr = errText
+        case .failedResponse(let errText):
+            errStr = errText
+        case .invalidUrl:
+            errStr = "invalidUrl"
+        case .statusCode404:
+            errStr = "statusCode404"
+        }
+        log.message("[OpenWeatherAgent]\(#function): \(errStr)", .error)
     }
 }
 
 try? client.call(with: callDetails)
+
 ```
 
-## Call 5 Day / 3 Hour Forecast
+## Request Forecast 
 
 ```swift
+
 let apikey = "The API key"
 
-let client = OpenWeatherFreeClient()
-let callDetails = OpenWeatherDetails(appid: apikey, format: .forecast)
+let client = OpenWeatherClient()
+let callDetails = OpenWeatherRequestData(appid: apikey, format: .forecast)
 
 client.onDataGiven = { result in
 
-  switch result {
+    switch result {
     case .success(let weatherData):
-      print("""
-        DATA: BEGIN
-        \(String(decoding: weatherData, as: UTF8.self))
-        DATA: END
-      """)
+        log.message("[OpenWeatherAgent]\(#function):\(result)")
     case .failure(let error):
-      switch error {
-       case .failedRequest(let message):
-         print(message)
-       default:
-         break
-      }
+        var errStr = ""
+        switch error {
+        case .failedRequest(let errText):
+            errStr = errText
+        case .failedResponse(let errText):
+            errStr = errText
+        case .invalidUrl:
+            errStr = "invalidUrl"
+        case .statusCode404:
+            errStr = "statusCode404"
+        }
+        log.message("[OpenWeatherAgent]\(#function): \(errStr)", .error)
     }
 }
 
 try? client.call(with: callDetails)
+
 ```
+
+# Points taken into account
+
+- Preconfigured Swift Package manifest [Package.swift](/Package.swift)
+- Preconfigured SwiftLint config [.swiftlint.yml](/.swiftlint.yml)
+- Preconfigured SwiftLint CI [swiftlint.yml](/.github/workflows/swiftlint.yml)
+- Preconfigured GitHub config [.gitignore](/.gitignore)
+- Preconfigured GitHub CI [main.yml](/.github/workflows/main.yml)
 
 # License MIT
 
-All files from this repository is under license based on MIT.
+Copyright © 7530 - 7533 Mikhail A. Zhigulin of Novosibirsk<br/>
+Copyright © 7533 PerseusRealDeal
 
-Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+- The year starts from the creation of the world according to a Slavic calendar.
+- September, the 1st of Slavic year. It means that "Sep 01, 2024" is the beginning of 7533.
 
-- The year starts from the creation of the world according to a Slavic calendar
-- September, the 1st of Slavic year
+## Other Required License Notices
+
+© 2025 The SwiftLint Contributors **for** SwiftLint</br>
+© GitHub **for** GitHub Action cirruslabs/swiftlint-action@v1</br>
+© 2021 Alexandre Colucci, geteimy.com **for** Shell Script SucceedsPostAction.sh</br>
 
 [LICENSE](/LICENSE) for details.
 
+## Credits
+
+<table>
+<tr>
+    <td>Balance and Control</td>
+    <td>kept by</td>
+    <td>Mikhail A. Zhigulin</td>
+</tr>
+<tr>
+    <td>Source Code</td>
+    <td>written by</td>
+    <td>Mikhail A. Zhigulin</td>
+</tr>
+<tr>
+    <td>Documentation</td>
+    <td>prepared by</td>
+    <td>Mikhail A. Zhigulin</td>
+</tr>
+<tr>
+    <td>Product Approbation</td>
+    <td>tested by</td>
+    <td>Mikhail A. Zhigulin</td>
+</tr>
+</table>
+
+- Language support: [Reverso](https://www.reverso.net/)
+- Git clients: [SmartGit](https://syntevo.com/) and [GitHub Desktop](https://github.com/apps/desktop)
+
 # Author
 
-> `OpenWeatherFreeClient` was written at Novosibirsk by Mikhail Zhigulin i.e. me, mzhigulin@gmail.com.
+> © Mikhail A. Zhigulin of Novosibirsk.

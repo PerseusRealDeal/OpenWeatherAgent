@@ -1,17 +1,18 @@
 //
 //  TestHelpers.swift
-//  OpenWeatherFreeClientTests
+//  OpenWeatherAgentTests
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
 //
 //  Licensed under the MIT license. See LICENSE file.
 //  All rights reserved.
 //
 
 import XCTest
-@testable import OpenWeatherFreeClient
+@testable import OpenWeatherAgent
 
 class DummyURLSessionDataTask: URLSessionDataTaskProtocol {
     func resume() {
@@ -29,8 +30,9 @@ class MockURLSession: URLSessionProtocol {
     var dataTaskArgsCompletionHandler: [(Data?, URLResponse?, Error?) -> Void] = []
 
     #if os(macOS)
-    func dataTask(with request: URLRequest, completionHandler: @escaping
-        (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+    func dataTask(with request: URLRequest, completionHandler:
+                  @escaping (Data?, URLResponse?, Error?) -> Void)
+    -> URLSessionDataTaskProtocol {
 
         appendRequest(request: request)
         dataTaskArgsCompletionHandler.append(completionHandler)
@@ -40,8 +42,9 @@ class MockURLSession: URLSessionProtocol {
         // return session.dataTask(with: URLRequest(url: URL(string: "http://DUMMY")!))
     }
     #else
-    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable
-        (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+    func dataTask(with request: URLRequest, completionHandler:
+                  @escaping @Sendable (Data?, URLResponse?, Error?) -> Void)
+    -> URLSessionDataTaskProtocol {
 
         appendRequest(request: request)
         dataTaskArgsCompletionHandler.append(completionHandler)

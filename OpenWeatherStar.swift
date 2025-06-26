@@ -1,16 +1,19 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.1.1
+//  Version: 0.2.0
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
+//
 //  All rights reserved.
 //
 //
 //  MIT License
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
 //
 //  The year starts from the creation of the world according to a Slavic calendar.
 //  September, the 1st of Slavic year.
@@ -33,14 +36,14 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-// swiftlint:disable file_length closure_parameter_position
+// swiftlint:disable file_length
 //
 
 import Foundation
 
-public class OpenWeatherFreeClient: FreeNetworkClient {
+public class OpenWeatherClient: NetworkClientFree {
 
-    public func call(with respect: OpenWeatherDetails) throws {
+    public func call(with respect: OpenWeatherRequestData) throws {
         guard let requestURL = URL(string: respect.urlString) else {
             throw NetworkClientError.invalidUrl
         }
@@ -56,12 +59,7 @@ public enum NetworkClientError: Error, Equatable {
     case failedResponse(String)
 }
 
-public enum Result<Value, Error: Swift.Error> {
-    case success(Value)
-    case failure(Error)
-}
-
-public class FreeNetworkClient {
+public class NetworkClientFree {
 
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession
@@ -69,19 +67,20 @@ public class FreeNetworkClient {
     public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
         switch result {
         case .success(let weatherData):
-            print("""
-            — Default closure invoked! \(#function): \(result)
-              DATA: BEGIN
-              \(String(decoding: weatherData, as: UTF8.self))
-              DATA: END
-            """)
+            log.message("[FreeNetworkClient].\(#function):\(result)")
         case .failure(let error):
+            var errStr = ""
             switch error {
-            case .failedRequest(let message):
-                log.message(message, .error)
-            default:
-                break
+            case .failedRequest(let errText):
+                errStr = errText
+            case .failedResponse(let errText):
+                errStr = errText
+            case .invalidUrl:
+                errStr = "invalidUrl"
+            case .statusCode404:
+                errStr = "statusCode404"
             }
+            log.message("[FreeNetworkClient].\(#function): \(errStr)", .error)
         }
     }
 
@@ -97,11 +96,9 @@ public class FreeNetworkClient {
     }
 
     internal func requestData(url: URL) {
-
-        log.message("[\(type(of: self))].\(#function)")
-
         dataTask = session.dataTask(with: URLRequest(url: url)) {
-            [self] (requestedData: Data?, response: URLResponse?, error: Error?) -> Void in
+            // swiftlint:disable:next closure_parameter_position
+            [self] (requestedData: Data?, response: URLResponse?, error: Error?) in
 
             // Answer
 
@@ -150,7 +147,7 @@ public class FreeNetworkClient {
 public let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
 public let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
-public enum OpenWeatherURLFormat: String {
+public enum OpenWeatherRequest: String {
     case currentWeather = "weather" // Default.
     case forecast = "forecast"
 }
@@ -181,10 +178,10 @@ extension Lang {
     public static let ru = Lang(rawValue: "ru")
 }
 
-public struct OpenWeatherDetails {
+public struct OpenWeatherRequestData {
 
     public let appid: String
-    public let format: OpenWeatherURLFormat
+    public let format: OpenWeatherRequest
 
     public let lat: String
     public let lon: String
@@ -196,9 +193,13 @@ public struct OpenWeatherDetails {
     // A number of timestamps, which will be returned in the API response.
     public var cnt: Int = -1
 
-    public init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
-                lat: String = "55.66", lon: String = "85.62", units: Units = .standard,
-                lang: Lang = Lang.byDefault, mode: Mode = Mode.json) {
+    public init(appid: String,
+                format: OpenWeatherRequest = .currentWeather,
+                lat: String = "55.66",
+                lon: String = "85.62",
+                units: Units = .standard,
+                lang: Lang = Lang.byDefault,
+                mode: Mode = Mode.json) {
 
         self.appid = appid
         self.format = format

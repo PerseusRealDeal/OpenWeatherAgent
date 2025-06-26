@@ -1,10 +1,11 @@
 //
-//  OpenWeatherRequestDetails.swift
-//  OpenWeatherFreeClient
+//  OpenWeatherRequest.swift
+//  OpenWeatherAgent
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
-//  Copyright © 7531 Mikhail Zhigulin of Novosibirsk.
+//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 PerseusRealDeal
 //
 //  Licensed under the MIT license. See LICENSE file.
 //  All rights reserved.
@@ -15,7 +16,7 @@ import Foundation
 public let weatherSchemeBase = "https://api.openweathermap.org/data/2.5/"
 public let weatherSchemeAttributes = "%@?lat=%@&lon=%@&appid=%@"
 
-public enum OpenWeatherURLFormat: String {
+public enum OpenWeatherRequest: String {
     case currentWeather = "weather" // Default.
     case forecast = "forecast"
 }
@@ -46,10 +47,10 @@ extension Lang {
     public static let ru = Lang(rawValue: "ru")
 }
 
-public struct OpenWeatherDetails {
+public struct OpenWeatherRequestData {
 
     public let appid: String
-    public let format: OpenWeatherURLFormat
+    public let format: OpenWeatherRequest
 
     public let lat: String
     public let lon: String
@@ -61,9 +62,13 @@ public struct OpenWeatherDetails {
     // A number of timestamps, which will be returned in the API response.
     public var cnt: Int = -1
 
-    public init(appid: String, format: OpenWeatherURLFormat = .currentWeather,
-                lat: String = "55.66", lon: String = "85.62", units: Units = .standard,
-                lang: Lang = Lang.byDefault, mode: Mode = Mode.json) {
+    public init(appid: String,
+                format: OpenWeatherRequest = .currentWeather,
+                lat: String = "55.66",
+                lon: String = "85.62",
+                units: Units = .standard,
+                lang: Lang = Lang.byDefault,
+                mode: Mode = Mode.json) {
 
         self.appid = appid
         self.format = format
