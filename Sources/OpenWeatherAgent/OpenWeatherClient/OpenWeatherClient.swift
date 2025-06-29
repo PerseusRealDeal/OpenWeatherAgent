@@ -17,6 +17,7 @@ public class OpenWeatherClient: NetworkClientFree {
 
     public func call(with respect: OpenWeatherRequestData) throws {
         guard let requestURL = URL(string: respect.urlString) else {
+            // WRONG: URL cann't be created at all
             throw OpenWeatherAPIClientError.invalidUrl
         }
 

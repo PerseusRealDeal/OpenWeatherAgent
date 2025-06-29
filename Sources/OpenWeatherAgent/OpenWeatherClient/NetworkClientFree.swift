@@ -58,7 +58,7 @@ public class NetworkClientFree {
     }
 
     public init(_ session: URLSession = URLSession.shared) {
-        log.message("[\(type(of: self))].\(#function)")
+        log.message("[\(type(of: self))].\(#function)", .info)
         self.session = session
     }
 
