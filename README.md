@@ -2,7 +2,8 @@
 
 > [`Weather-MenuBar-App for macOS`](https://github.com/perseusrealdeal/TheDarkMoon)<br/>
 
-> OpenWeatherMap API Client requests with `<https://api.openweathermap.org/data/2.5/>`. `Individual API key` is required.<br/>
+> `OpenWeatherAgent` is an OpenWeatherMap API Client for`<https://api.openweathermap.org/data/2.5/>`.<br/>
+> `Individual API key` is required.<br/>
 
 > - To request current weather.<br/>
 > - To request `5 Day / 3 Hour` forecast.<br/>
@@ -11,7 +12,7 @@
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml)
 [![Style](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml)
-[![Version](https://img.shields.io/badge/Version-0.2.0-green.svg)](/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.3.1-green.svg)](/CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS%2010.13+Cocoa_|_iOS%2011.0+UIKit-orange.svg)](https://en.wikipedia.org/wiki/List_of_Apple_products)
 [![Xcode 14.2](https://img.shields.io/badge/Xcode-14.2+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
 [![Swift 5.7](https://img.shields.io/badge/Swift-5.7-red.svg)](https://www.swift.org)
@@ -69,7 +70,12 @@
 
 ## Request Current Weather
 
+### `Case structured concurrency:`
+
 ```swift
+
+// Source Code: Console Perseus Logger
+// https://github.com/perseusrealdeal/ConsolePerseusLogger
 
 let apikey = "The API key"
 
@@ -80,7 +86,9 @@ client.onDataGiven = { result in
 
     switch result {
     case .success(let weatherData):
-        log.message("[OpenWeatherAgent]\(#function):\(result)")
+        // Source Code: Data extension prettyPrinted
+        // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+        log.message(weatherData.prettyPrinted! as String)
     case .failure(let error):
         var errStr = ""
         switch error {
@@ -101,9 +109,42 @@ try? client.call(with: callDetails)
 
 ```
 
+### `Case async/await concurrency:` from iOS 13, macOS 10.15
+
+``` swift
+
+// Source Code: Console Perseus Logger
+// https://github.com/perseusrealdeal/ConsolePerseusLogger
+
+log.format = .textonly
+
+let apikey = "The API key"
+let respect = OpenWeatherRequestData(appid: apikey)
+
+do {
+    let data = try await OpenWeatherAgent.shared.fetch(with: respect)
+
+    // Source Code: Data extension prettyPrinted
+    // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+
+    log.message(data.prettyPrinted! as String)
+
+} catch let error as OpenWeatherAPIClientError {
+    log.message("OpenWeatherAPIClientError: \(error)", .error)
+} catch {
+    log.message(error.localizedDescription, .error)
+}
+
+```
+
 ## Request Forecast 
 
+### `Case: structured concurrency`
+
 ```swift
+
+// Source Code: Console Perseus Logger
+// https://github.com/perseusrealdeal/ConsolePerseusLogger
 
 let apikey = "The API key"
 
@@ -114,7 +155,9 @@ client.onDataGiven = { result in
 
     switch result {
     case .success(let weatherData):
-        log.message("[OpenWeatherAgent]\(#function):\(result)")
+        // Source Code: Data extension prettyPrinted
+        // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+        log.message(weatherData.prettyPrinted! as String)
     case .failure(let error):
         var errStr = ""
         switch error {
@@ -132,6 +175,34 @@ client.onDataGiven = { result in
 }
 
 try? client.call(with: callDetails)
+
+```
+
+### `Case async/await concurrency:` from iOS 13, macOS 10.15
+
+``` swift
+
+// Source Code: Console Perseus Logger
+// https://github.com/perseusrealdeal/ConsolePerseusLogger
+
+log.format = .textonly
+
+let apikey = "The API key"
+let respect = OpenWeatherRequestData(appid: apikey, format: .forecast)
+
+do {
+    let data = try await OpenWeatherAgent.shared.fetch(with: respect)
+
+    // Source Code: Data extension prettyPrinted
+    // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+
+    log.message(data.prettyPrinted! as String)
+
+} catch let error as OpenWeatherAPIClientError {
+    log.message("OpenWeatherAPIClientError: \(error)", .error)
+} catch {
+    log.message(error.localizedDescription, .error)
+}
 
 ```
 

@@ -77,7 +77,8 @@ final class OpenWeatherAgentTests: XCTestCase {
         // simulate request
         XCTAssertThrowsError(try sut.call(with: dummyCallDetails)) { (error) in
             // catch exeption
-            XCTAssertEqual(error as? NetworkClientError, NetworkClientError.invalidUrl)
+            XCTAssertEqual(error as? OpenWeatherAPIClientError,
+                           OpenWeatherAPIClientError.invalidUrl)
         }
     }
 
@@ -88,8 +89,8 @@ final class OpenWeatherAgentTests: XCTestCase {
         sut.session = mockURLSession
         let dummyCallDetails = OpenWeatherRequestData(appid: "code")
 
-        let expectedData: Result<Data, NetworkClientError> = .success(Data())
-        var actualData: Result<Data, NetworkClientError> = .failure(.statusCode404)
+        let expectedData: Result<Data, OpenWeatherAPIClientError> = .success(Data())
+        var actualData: Result<Data, OpenWeatherAPIClientError> = .failure(.statusCode404)
 
         let onDataGivenInvoked = expectation(description: "onDataGiven closure invoked")
         sut.onDataGiven = { result in
@@ -124,8 +125,8 @@ final class OpenWeatherAgentTests: XCTestCase {
         let status_code = 404
         // let message = HTTPURLResponse.localizedString(forStatusCode: status_code)
 
-        let expectedFailure: Result<Data, NetworkClientError> = .failure(.statusCode404)
-        var actualFailure: Result<Data, NetworkClientError> = .success(Data())
+        let expectedFailure: Result<Data, OpenWeatherAPIClientError> = .failure(.statusCode404)
+        var actualFailure: Result<Data, OpenWeatherAPIClientError> = .success(Data())
 
         let happiness = loadTestJsonData()
 
@@ -163,8 +164,8 @@ final class OpenWeatherAgentTests: XCTestCase {
 
         let happiness = loadTestJsonData()
 
-        let expectedData: Result<Data, NetworkClientError> = .success(happiness)
-        var actualData: Result<Data, NetworkClientError> = .success(Data())
+        let expectedData: Result<Data, OpenWeatherAPIClientError> = .success(happiness)
+        var actualData: Result<Data, OpenWeatherAPIClientError> = .success(Data())
 
         let onDataGivenInvoked = expectation(description: "onDataGiven closure invoked")
 

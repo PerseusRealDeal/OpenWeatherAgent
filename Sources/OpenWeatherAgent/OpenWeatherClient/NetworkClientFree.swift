@@ -13,7 +13,7 @@
 
 import Foundation
 
-public enum NetworkClientError: Error, Equatable {
+public enum OpenWeatherAPIClientError: Error, Equatable {
     case invalidUrl
     case failedRequest(String)
     case statusCode404
@@ -30,7 +30,7 @@ public class NetworkClientFree {
     private(set) var session: URLSession
     #endif
 
-    public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
+    public var onDataGiven: (Result<Data, OpenWeatherAPIClientError>) -> Void = { result in
         switch result {
         case .success(let weatherData):
             log.message("[FreeNetworkClient].\(#function):\(result)")
@@ -70,7 +70,7 @@ public class NetworkClientFree {
             // Answer
 
             var answerData: Data?
-            var answerError: NetworkClientError?
+            var answerError: OpenWeatherAPIClientError?
 
             // Check Status
 

@@ -5,6 +5,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Dates in this file meets Gregorian calendar. Date in format YYYY-MM-DD.
 
+## [0.3.1] - [2025-06-29], OpenWeather Agent
+
+### Fixed
+
+- OpenWeatherAgent catch block of code.
+
+## [0.3.0] - [2025-06-29], OpenWeather Agent
+
+### Added
+
+- OpenWeatherAgent Singletone for async/await concurrency.
+- Renamed: NetworkClientError > OpenWeatherAPIClientError.
+
 ## [0.2.0] - [2025-06-26], OpenWeather Agent
 
 ### Changed
