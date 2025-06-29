@@ -1,6 +1,6 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.2.0
+//  Version: 0.3.0
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -45,14 +45,14 @@ public class OpenWeatherClient: NetworkClientFree {
 
     public func call(with respect: OpenWeatherRequestData) throws {
         guard let requestURL = URL(string: respect.urlString) else {
-            throw NetworkClientError.invalidUrl
+            throw OpenWeatherAPIClientError.invalidUrl
         }
 
         requestData(url: requestURL)
     }
 }
 
-public enum NetworkClientError: Error, Equatable {
+public enum OpenWeatherAPIClientError: Error, Equatable {
     case invalidUrl
     case failedRequest(String)
     case statusCode404
@@ -64,7 +64,7 @@ public class NetworkClientFree {
     private(set) var dataTask: URLSessionDataTask?
     private(set) var session: URLSession
 
-    public var onDataGiven: (Result<Data, NetworkClientError>) -> Void = { result in
+    public var onDataGiven: (Result<Data, OpenWeatherAPIClientError>) -> Void = { result in
         switch result {
         case .success(let weatherData):
             log.message("[FreeNetworkClient].\(#function):\(result)")
@@ -103,7 +103,7 @@ public class NetworkClientFree {
             // Answer
 
             var answerData: Data?
-            var answerError: NetworkClientError?
+            var answerError: OpenWeatherAPIClientError?
 
             // Check Status
 
@@ -233,4 +233,50 @@ public struct OpenWeatherRequestData {
 
         return weatherSchemeBase + attributes
     }
+}
+
+@available(macOS 10.15.0, *)
+@available(iOS 13.0.0, *)
+public class OpenWeatherAgent {
+
+    // MARK: - Properties
+
+    public static var shared: OpenWeatherAgent { instance }
+
+    // MARK: - Contract
+
+    public func fetch(with respect: OpenWeatherRequestData) async throws -> Data {
+        do {
+            guard let url = URL(string: respect.urlString) else {
+                throw OpenWeatherAPIClientError.invalidUrl
+            }
+
+            let (data, response) = try await URLSession.shared.data(from: url)
+
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                throw OpenWeatherAPIClientError.failedResponse("Invalid Response")
+            }
+
+            guard (200...299).contains(statusCode) else {
+                if statusCode == 404 {
+                    throw OpenWeatherAPIClientError.statusCode404
+                }
+                throw OpenWeatherAPIClientError.failedResponse("Status Code: \(statusCode)")
+            }
+
+            return data
+
+        } catch let error as OpenWeatherAPIClientError {
+            throw error
+        } catch let error as URLError {
+            throw OpenWeatherAPIClientError.failedRequest("URLError: \(error)")
+        } catch {
+            throw OpenWeatherAPIClientError.failedRequest(error.localizedDescription)
+        }
+    }
+
+    // MARK: - Singletone
+
+    private static var instance = OpenWeatherAgent()
+    private init() { }
 }
