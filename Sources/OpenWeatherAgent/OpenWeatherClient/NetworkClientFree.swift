@@ -75,17 +75,17 @@ public class NetworkClientFree {
             // Check Status
 
             if let error = error {
-                answerError = .failedResponse(error.localizedDescription)
                 // WRONG: https://apiiiii.openweathermap.org/...
+                answerError = .failedResponse(error.localizedDescription)
             } else {
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                     if statusCode == 404 {
-                        answerError = .statusCode404
                         // WRONG: https://api.openweathermap.org/data/999/...
-                    } else if statusCode != 200 {
+                        answerError = .statusCode404
+                    } else if !(200...299).contains(statusCode) {
+                        // WRONG: https://api.openweathermap.org/...&appid=wrong_api_key
                         answerError = .failedResponse(
                             HTTPURLResponse.localizedString(forStatusCode: statusCode))
-                        // WRONG: https://api.openweathermap.org/...&appid=wrong_api_key
                     }
                 } else {
                     answerError = .failedResponse("No Status Code")

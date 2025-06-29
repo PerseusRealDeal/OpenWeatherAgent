@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Dates in this file meets Gregorian calendar. Date in format YYYY-MM-DD.
 
+## [0.3.2] - [2025-06-29], OpenWeather Agent
+
+### Fixed
+
+- OpenWeatherAgent error details.
+
 ## [0.3.1] - [2025-06-29], OpenWeather Agent
 
 ### Fixed
