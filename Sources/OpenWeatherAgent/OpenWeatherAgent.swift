@@ -26,6 +26,7 @@ public class OpenWeatherAgent {
     public func fetch(with respect: OpenWeatherRequestData) async throws -> Data {
         do {
             guard let url = URL(string: respect.urlString) else {
+                // WRONG: URL cann't be created at all
                 throw OpenWeatherAPIClientError.invalidUrl
             }
 
@@ -60,5 +61,7 @@ public class OpenWeatherAgent {
     // MARK: - Singletone
 
     private static var instance = OpenWeatherAgent()
-    private init() { }
+    private init() {
+        log.message("[\(type(of: self))].\(#function)", .info)
+    }
 }

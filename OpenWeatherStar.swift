@@ -1,6 +1,6 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.3.2
+//  Version: 0.3.3
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -45,6 +45,7 @@ public class OpenWeatherClient: NetworkClientFree {
 
     public func call(with respect: OpenWeatherRequestData) throws {
         guard let requestURL = URL(string: respect.urlString) else {
+            // WRONG: URL cann't be created at all
             throw OpenWeatherAPIClientError.invalidUrl
         }
 
@@ -92,6 +93,7 @@ public class NetworkClientFree {
     }
 
     public init(_ session: URLSession = URLSession.shared) {
+        log.message("[\(type(of: self))].\(#function)", .info)
         self.session = session
     }
 
@@ -248,6 +250,7 @@ public class OpenWeatherAgent {
     public func fetch(with respect: OpenWeatherRequestData) async throws -> Data {
         do {
             guard let url = URL(string: respect.urlString) else {
+                // WRONG: URL cann't be created at all
                 throw OpenWeatherAPIClientError.invalidUrl
             }
 
@@ -282,5 +285,7 @@ public class OpenWeatherAgent {
     // MARK: - Singletone
 
     private static var instance = OpenWeatherAgent()
-    private init() { }
+    private init() {
+        log.message("[\(type(of: self))].\(#function)", .info)
+    }
 }
