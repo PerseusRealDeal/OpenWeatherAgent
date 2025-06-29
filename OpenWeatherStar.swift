@@ -1,6 +1,6 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.3.0
+//  Version: 0.3.1
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -266,12 +266,10 @@ public class OpenWeatherAgent {
 
             return data
 
-        } catch let error as OpenWeatherAPIClientError {
-            throw error
         } catch let error as URLError {
             throw OpenWeatherAPIClientError.failedRequest("URLError: \(error)")
         } catch {
-            throw OpenWeatherAPIClientError.failedRequest(error.localizedDescription)
+            throw error
         }
     }
 
