@@ -2,9 +2,9 @@
 //  OpenWeatherAgent.swift
 //  OpenWeatherAgent
 //
-//  Created by Mikhail Zhigulin in 7531.
+//  Created by Mikhail Zhigulin in 7533.
 //
-//  Copyright © 7531 - 7533 Mikhail A. Zhigulin of Novosibirsk
+//  Copyright © 7533 Mikhail A. Zhigulin of Novosibirsk
 //  Copyright © 7533 PerseusRealDeal
 //
 //  Licensed under the MIT license. See LICENSE file.
