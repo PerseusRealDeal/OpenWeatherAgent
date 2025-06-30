@@ -12,7 +12,7 @@
 
 [![Actions Status](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/main.yml)
 [![Style](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml/badge.svg)](https://github.com/perseusrealdeal/OpenWeatherAgent/actions/workflows/swiftlint.yml)
-[![Version](https://img.shields.io/badge/Version-0.3.4-green.svg)](/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.3.5-green.svg)](/CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS%2010.13+Cocoa_|_iOS%2011.0+UIKit-orange.svg)](https://en.wikipedia.org/wiki/List_of_Apple_products)
 [![Xcode 14.2](https://img.shields.io/badge/Xcode-14.2+-red.svg)](https://en.wikipedia.org/wiki/Xcode)
 [![Swift 5.7](https://img.shields.io/badge/Swift-5.7-red.svg)](https://www.swift.org)
@@ -74,9 +74,6 @@
 
 ```swift
 
-// Source Code: prettyPrinted
-// https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
-
 let apikey = "The API key"
 
 let client = OpenWeatherClient()
@@ -86,6 +83,8 @@ client.onDataGiven = { result in
 
     switch result {
     case .success(let weatherData):
+        // Source Code: prettyPrinted
+        // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
         log.message(weatherData.prettyPrinted! as String)
     case .failure(let error):
         var errStr = ""
@@ -111,15 +110,17 @@ try? client.call(with: respect)
 
 ``` swift
 
-// Source Code: prettyPrinted
-// https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
-
 let apikey = "The API key"
 let respect = OpenWeatherRequestData(appid: apikey)
 
 do {
     let data = try await OpenWeatherAgent.shared.fetch(with: respect)
+    
+    // Source Code: prettyPrinted
+    // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+    
     log.message(data.prettyPrinted! as String)
+    
 } catch let error as OpenWeatherAPIClientError {
     log.message("OpenWeatherAPIClientError: \(error)", .error)
 } catch {
@@ -134,18 +135,17 @@ do {
 
 ```swift
 
-// Source Code: prettyPrinted
-// https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
-
 let apikey = "The API key"
 
 let client = OpenWeatherClient()
-let respect = OpenWeatherRequestData(appid: apikey, format: .forecast)
+let respect = OpenWeatherRequestData(appid: apikey, request: .forecast)
 
 client.onDataGiven = { result in
 
     switch result {
     case .success(let weatherData):
+        // Source Code: prettyPrinted
+        // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
         log.message(weatherData.prettyPrinted! as String)
     case .failure(let error):
         var errStr = ""
@@ -171,15 +171,17 @@ try? client.call(with: respect)
 
 ``` swift
 
-// Source Code: prettyPrinted
-// https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
-
 let apikey = "The API key"
-let respect = OpenWeatherRequestData(appid: apikey, format: .forecast)
+let respect = OpenWeatherRequestData(appid: apikey, request: .forecast)
 
 do {
     let data = try await OpenWeatherAgent.shared.fetch(with: respect)
+
+    // Source Code: prettyPrinted
+    // https://gist.github.com/perseusrealdeal/945c9050cb9f7a19e00853f064acacca
+
     log.message(data.prettyPrinted! as String)
+
 } catch let error as OpenWeatherAPIClientError {
     log.message("OpenWeatherAPIClientError: \(error)", .error)
 } catch {
