@@ -1,6 +1,6 @@
 //
 //  OpenWeatherStar.swift
-//  Version: 0.3.3
+//  Version: 0.3.4
 //
 //  Created by Mikhail Zhigulin in 7531.
 //
@@ -183,7 +183,7 @@ extension Lang {
 public struct OpenWeatherRequestData {
 
     public let appid: String
-    public let format: OpenWeatherRequest
+    public let request: OpenWeatherRequest
 
     public let lat: String
     public let lon: String
@@ -196,7 +196,7 @@ public struct OpenWeatherRequestData {
     public var cnt: Int = -1
 
     public init(appid: String,
-                format: OpenWeatherRequest = .currentWeather,
+                request: OpenWeatherRequest = .currentWeather,
                 lat: String = "55.66",
                 lon: String = "85.62",
                 units: Units = .standard,
@@ -204,7 +204,7 @@ public struct OpenWeatherRequestData {
                 mode: Mode = Mode.json) {
 
         self.appid = appid
-        self.format = format
+        self.request = request
         self.lat = lat
         self.lon = lon
         self.units = units
@@ -214,14 +214,14 @@ public struct OpenWeatherRequestData {
 
     public var urlString: String {
 
-        let args: [String] = [format.rawValue, lat, lon, appid]
+        let args: [String] = [request.rawValue, lat, lon, appid]
         var attributes = String(format: weatherSchemeAttributes, arguments: args)
 
         if !lang.rawValue.isEmpty {
             attributes.append("&lang=\(lang.rawValue)")
         }
 
-        if format == .forecast && cnt != -1 {
+        if request == .forecast && cnt != -1 {
             attributes.append("&cnt=\(cnt)")
         }
 

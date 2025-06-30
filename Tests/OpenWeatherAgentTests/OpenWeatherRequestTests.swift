@@ -53,7 +53,7 @@ final class OpenWeatherRequestTests: XCTestCase {
         // arrange
 
         let apikey = "code"
-        let format: OpenWeatherRequest = .forecast
+        let request: OpenWeatherRequest = .forecast
         let lat = 11.11
         let lon = 22.22
         let units: Units = .metric
@@ -62,7 +62,7 @@ final class OpenWeatherRequestTests: XCTestCase {
         let cnt = 1
 
         var sut = OpenWeatherRequestData(appid: apikey,
-                                         format: format,
+                                         request: request,
                                          lat: "\(lat)",
                                          lon: "\(lon)",
                                          units: units,
@@ -74,7 +74,7 @@ final class OpenWeatherRequestTests: XCTestCase {
         let requirementSchemeAttributes =
         "%@?lat=%@&lon=%@&appid=%@&lang=%@&cnt=%@&mode=%@&units=%@"
 
-        let args: [String] = [format.rawValue, "\(lat)", "\(lon)", apikey,
+        let args: [String] = [request.rawValue, "\(lat)", "\(lon)", apikey,
                               lang.rawValue, "\(cnt)", mode.rawValue, units.rawValue]
         let requirement = String(format: requirementScheme + requirementSchemeAttributes,
                                  arguments: args)
